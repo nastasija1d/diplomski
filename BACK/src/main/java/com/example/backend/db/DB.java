@@ -14,7 +14,7 @@ public class DB {
         dmds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dmds.setUrl("jdbc:mysql://localhost:3306/diplomski");
         dmds.setUsername("root");
-        dmds.setPassword("aaaa");
+        dmds.setPassword("root");
 
         return dmds;
     }
