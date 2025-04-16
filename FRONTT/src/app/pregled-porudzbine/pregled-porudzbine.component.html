@@ -1,0 +1,39 @@
+<div class="order-container">
+  <h2>Pregled porudžbine</h2>
+
+  <table class="order-table">
+      <thead>
+          <tr>
+              <th>Naziv</th>
+              <th>Količina</th>
+              <th>Cena</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let artikal of artikli">
+              <td>{{ artikal.naziv }}</td>
+              <td>{{ artikal.korpa }}</td>
+              <td>{{ artikal.cena_prodajna }} RSD</td>
+          </tr>
+      </tbody>
+  </table>
+
+  <div class="total-info">
+    <p><strong>Ukupno:</strong> {{total}} RSD</p>
+    <p><strong>Cena dostave:</strong> {{dostava}} RSD</p>
+    <p style="font-size:small;">*besplatna dostava za porudzbine preko 5000 RSD</p>
+    <p class="total-price"><strong>Ukupno sa dostavom:</strong> {{ totaltotal }} RSD</p>
+  </div>
+
+  <div class="user-info">
+      <h3>Podaci za dostavu</h3>
+      <p><strong>Grad:</strong> </p>
+      <p><strong>Adresa:</strong> </p>
+      <p><strong>Telefon:</strong> </p>
+      <button class="edit-button">
+          <span class="icon">✏️</span> Izmeni
+      </button>
+  </div>
+
+  <app-dugme-poruci></app-dugme-poruci>
+</div>

@@ -1,0 +1,60 @@
+<div class="container">
+  <form class="form">
+    <p class="title">Dodaj novi artikal</p>
+    <label>
+      <select class="input" required (change)="onVrstaChange($event)" [(ngModel)]="vrsta" [ngModelOptions]="{standalone: true}">
+        <option value="" disabled selected>Izaberi vrstu</option>
+        @for (o of vrstaOptions; track o) {
+          <option [value]="o">{{o}}</option>
+        }
+      </select>
+      <span>Vrsta</span>
+    </label>
+    <label>
+      <select class="input" [(ngModel)]="podvrsta" required [disabled]="disabled" [ngModelOptions]="{standalone: true}">
+        <option value="" disabled selected>Izaberi podvrstu</option>
+        @for (o of podvrstaOptions; track o) {
+          <option [value]="o">{{o}}</option>
+        }
+      </select>
+      <span>Podvrsta</span>
+    </label>
+    <label>
+      <select class="input" [(ngModel)]="marka" required [ngModelOptions]="{standalone: true}">
+        <option value="" disabled selected>Izaberi marku automobila</option>
+        @for (o of markaOptions; track o) {
+          <option [value]="o">{{o}}</option>
+        }
+      </select>
+      <span>Marka automobila</span>
+    </label>
+    <label>
+      <select class="input" [(ngModel)]="proizvodjac" required [ngModelOptions]="{standalone: true}">
+        <option value="" disabled selected>Izaberi proizvodjaca</option>
+        @for (o of proizvodjacOptions; track o) {
+          <option [value]="o">{{o}}</option>
+        }
+      </select>
+      <span>Proizvodjac</span>
+    </label>
+    <label>
+      <input class="input" type="text" [(ngModel)]="naziv" required [ngModelOptions]="{standalone: true}">
+      <span>Naziv artikla</span>
+    </label>
+    <label>
+      <input class="input" type="number" [(ngModel)]="kolicina" required [ngModelOptions]="{standalone: true}">
+      <span>Kolicina</span>
+    </label>
+    <div class="flex">
+      <label>
+        <input class="input" type="number" [(ngModel)]="cena_nabavna" required [ngModelOptions]="{standalone: true}">
+        <span>Nabavna cena</span>
+      </label>
+      <label>
+        <input class="input" type="number" [(ngModel)]="cena_prodajna" required [ngModelOptions]="{standalone: true}">
+        <span>Prodajna cena</span>
+      </label>
+    </div>
+    <button class="submit" (click)="dodaj()">Potvrdi</button>
+  </form>
+</div>

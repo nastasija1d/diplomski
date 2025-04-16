@@ -1,0 +1,138 @@
+/* korpa-stavka.component.css */
+.cart-item-card {
+  display: flex;
+  position: relative;
+  gap: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+img{
+  width: 100px;
+  height: 100px;
+}
+
+.item-image .image-placeholder {
+  width: 10px;
+  height: 10px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  margin-left: 30px;
+}
+
+.item-content {
+  flex-grow: 1;
+  margin-left: 30px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  margin-left: 30px;
+}
+
+.item-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: #1976d2;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.item-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+
+.price {
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.total-price {
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantity-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #1976d2;
+  border-radius: 50%;
+  background: white;
+  color: #1976d2;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn:hover {
+  background: #1976d2;
+  color: white;
+}
+
+.quantity {
+  min-width: 30px;
+  text-align: center;
+  color: #1976d2;
+  font-weight: bold;
+}
+
+td{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+th{
+  font-weight: 300;
+}
+
+.cart-toast {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Opcionalna animacija za skrivanje */
+.cart-toast.hide {
+  opacity: 0;
+}
+
+a {
+  text-decoration: none; /* Uklanja podvlačenje */
+  color: #007bff; /* Plava boja za linkove */
+  transition: color 0.3s ease; /* Efekat prelaza boje */
+}
+
+a:hover {
+  color: #0056b3; /* Tamnija plava boja pri hover-u */
+}

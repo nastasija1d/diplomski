@@ -1,0 +1,26 @@
+<div class="tabs-container">
+    <div class="tabs">
+      <button  class="tab-button" [class.active]="activeTab === 'kategorija'" (click)="setActiveTab('kategorija')">
+        Kategorija
+      </button>
+      <button
+        class="tab-button" [class.active]="activeTab === 'brend'" (click)="setActiveTab('brend')">
+        Brend
+      </button>
+      <button
+        class="tab-button" [class.active]="activeTab === 'proizvodjac'" (click)="setActiveTab('proizvodjac')">
+        Proizvođač
+      </button>
+    </div>
+
+    <div *ngIf="activeTab === 'kategorija'" class="tab-content">
+      <p style="color: white;">Ovde se prikazuje sadržaj za <strong>Kategoriju</strong>.</p>
+    </div>
+    <div *ngIf="activeTab === 'brend'" class="tab-content">
+      <p style="color: white;">Ovde se prikazuje sadržaj za <strong>Brend</strong>.</p>
+      <app-vlager-brend></app-vlager-brend>
+    </div>
+    <div *ngIf="activeTab === 'proizvodjac'" class="tab-content">
+      <p style="color: white;">Ovde se prikazuje sadržaj za <strong>Proizvođača</strong>.</p>
+    </div>
+  </div>

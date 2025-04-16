@@ -1,0 +1,35 @@
+<!-- korpa-stavka.component.html -->
+<div class="cart-item-card">
+  <div class="item-image">
+    <img [src]="slika">
+  </div>
+
+  <div class="item-content">
+    <div class="item-header">
+      <h3 class="item-title">
+        <a [routerLink]="['/artikal', artikal.id]" class="item-title">{{artikal.naziv}}</a>
+      </h3>
+    </div>
+    <table class="">
+      <tr>
+        <th>Cena</th>
+        <th>Količina</th>
+        <th>Ukupno</th>
+      </tr>
+      <tr>
+        <td class=" price">{{ artikal.cena_prodajna }} RSD</td>
+        <td>
+          <div class="quantity-control">
+            <button class="quantity-btn" (click)="decrement()">-</button>
+            <span class="quantity">{{ artikal.korpa }}</span>
+            <button class="quantity-btn" (click)="increment()">+</button>
+          </div>
+        </td>
+        <td class=" total-price">{{ total }} RSD</td>
+      </tr>
+    </table>
+  </div>
+  <div class="cart-toast" *ngIf="showToast">
+    {{message}}
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="slider-container">
+  <div class="slider-track"></div>
+  <input type="range" min="{{min}}" max="{{max}}" [(ngModel)]="lowerValue" step="100" (input)="onInput()" class="slider lower">
+  <input type="range" min="{{min}}" max="{{max}}" [(ngModel)]="upperValue" step="100" (input)="onInput()" class="slider upper">
+  <div class="slider-label">{{lowerValue}} - {{upperValue}}</div> <!-- Dodata labela -->
+</div>

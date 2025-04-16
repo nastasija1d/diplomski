@@ -1,0 +1,22 @@
+<div class="container">
+  <h1 class="text-center">Welcome to the Shop Owner Dashboard</h1>
+  <div class="row">
+    <div class="col-lg-6 col-md-12 mb-4" *ngFor="let card of cards">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img [src]="card.image"  style="width:auto;height:90%;margin-top: 5px;">
+          </div>
+          <div class="flip-card-back">
+            <h1>
+              <a [routerLink]="card.link" class="text-decoration-none">{{card.title}}</a>
+            </h1>
+            <p>
+              <a [routerLink]="card.link" class="text-decoration-none">{{card.description}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

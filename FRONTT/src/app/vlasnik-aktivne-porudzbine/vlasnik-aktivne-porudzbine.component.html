@@ -1,0 +1,6 @@
+<div>
+  <h3>Pregled svih trenutnih porudzbina</h3>
+  <div *ngFor="let por of svePorudzbine" >
+    <app-vlasnik-porudzbina-kartica [porudzbina]="por"></app-vlasnik-porudzbina-kartica>
+  </div>
+</div>

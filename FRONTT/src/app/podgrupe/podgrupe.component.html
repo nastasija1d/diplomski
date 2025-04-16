@@ -1,0 +1,11 @@
+<h1>{{naziv}}</h1>
+
+<div class="container mt-4">
+  <div class="row g-3">
+    <div *ngFor="let p of podgrupe"
+      class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
+      <app-podgrupa-card [podgrupa]="p" [grupa]="naziv" ></app-podgrupa-card>
+    </div>
+  </div>
+</div>
+

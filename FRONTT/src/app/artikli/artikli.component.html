@@ -1,0 +1,57 @@
+<h1 style="color: aliceblue; padding-top: 20px;">{{naslov}}</h1>
+<div class="container" *ngIf="!isLoading">
+  <div  class="filters-container">
+    <label>
+      <span>Marka</span>
+      <select [(ngModel)]="odabranaMarka" >
+        <option [value]="" selected disabled>Odaberite marku</option>
+        <option value="">Sve marke</option>
+        <option *ngFor="let marka of marke" [value]="marka">
+          {{ marka }}
+        </option>
+      </select>
+    </label>
+    <label>
+      <span>Proizvođač</span>
+      <select [(ngModel)]="odabraniProizvodjac">
+        <option [value]=""  disabled>Odaberite proizvođača</option>
+        <option value="" selected>Svi proizvođači</option>
+        <option *ngFor="let proizvodjac of proizvodjaci" [value]="proizvodjac.naziv">
+          {{ proizvodjac.naziv }} ({{proizvodjac.broj}})
+        </option>
+      </select>
+    </label>
+    <label>
+      <span>Dostupnost</span>
+      <select [(ngModel)]="minKolicina">
+        <option value="" selected disabled>Odaberite dostupnost</option>
+        <option value="0">Svi artikli ({{ukupno}})</option>
+        <option value="1">Dostupni ({{dostupno}})</option>
+      </select>
+    </label>
+    <div style="width: 200px; height: 40px;">
+      <app-double-slider [min]="0" [max]="upperValue+100" >
+      </app-double-slider>
+    </div>
+  </div>
+
+
+
+  <button (click)="filtriraj()" class="submit">Filtriraj</button>
+</div>
+<div class="container mt-4" *ngIf="!isLoading && !isEmpty">
+  <div class="row g-3">
+    <div *ngFor="let artikal of artikli"
+      class="col-12 col-sm-12 col-md-6 col-lg-4 d-flex align-items-stretch">
+      <app-artikal-card [artikal]="artikal"></app-artikal-card>
+    </div>
+  </div>
+</div>
+<div *ngIf="isLoading" class="klipovi-container">
+  <img src="klipovi.gif" alt="Loading..." class="klipovi" />
+</div>
+<div *ngIf="isEmpty && !isLoading" class="loader-container">
+  <img src="brokenCar.png" alt="Loading..." class="loader-gif" />
+  <br>
+  <p>Nema artikala za unete kriterijume</p>
+</div>

@@ -1,0 +1,141 @@
+.artikl-container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.artikl-naslov {
+  text-align: center;
+  color: #007bff;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.artikl-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.artikl-slika-container {
+  flex: 1;
+}
+
+.artikl-slika {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.artikl-info {
+  margin: 50px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 20px;
+  align-items: flex-start; /* Poravnavanje uz levu ivicu */
+}
+
+.artikl-info p {
+  margin: 7px 0;
+  text-align: left; /* Dodato da bi tekst bio poravnat levo */
+}
+
+.dugme-korpa {
+  background: #007bff;
+  color: white;
+  padding: 8px 15px; /* Manje dugme (manje padding-a) */
+  border: none;
+  border-radius: 8px;
+  font-size: 14px; /* Manji font */
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-top: 20px;
+  width: auto; /* Dugme neće biti 100% širine */
+}
+
+.dugme-korpa:hover {
+  background: #0056b3;
+}
+
+
+.cena {
+  font-size: 18px;
+  color: #004080;
+  font-weight: bold;
+}
+
+
+
+/* Dugme – moderno stilizovano dugme sa interaktivnim efektima */
+.card-button {
+  border: none;
+  background: linear-gradient(145deg, #00bfff, #009acd);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+/* Kada je artikal na stanju */
+.card-button.hover-true:hover {
+  background: linear-gradient(145deg, #009acd, #00bfff);
+  transform: scale(1.05);
+}
+
+/* Kada artikal nije na stanju – dugme se stilizuje u crvenoj nijansi */
+.card-button.hover-false {
+  background: linear-gradient(145deg, #ff4d4d, #e60000);
+}
+
+.card-button.hover-false:hover {
+  background: linear-gradient(145deg, #e60000, #ff4d4d);
+  transform: scale(1.05);
+}
+
+
+/* SVG ikonica unutar dugmeta */
+.svg-icon {
+  width: 80px;
+  height: 20px;
+}
+
+/* Toast notifikacija */
+.cart-toast {
+  position: absolute;
+  top:70%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 12px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.cart-toast.hide {
+  opacity: 0;
+}
+
+a {
+  text-decoration: none; /* Uklanja podvučenu liniju */
+  outline: none; /* Uklanja fokus okvir */
+}
+
+
+

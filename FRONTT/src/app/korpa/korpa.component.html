@@ -1,0 +1,47 @@
+<h1>Korpa</h1>
+<div *ngIf="artikli.length===0">
+  <h1>Vasa korpa je prazna</h1>
+  <a routerLink="/pocetna">Pogledajte nase proizvode</a>
+</div>
+<div class="cart-container" *ngIf="artikli.length > 0">
+
+  <div class="cart-items">
+    <div class="section">
+      <app-korpa-stavka
+        *ngFor="let item of artikli"
+        [artikal]=item
+        (removeRequested)="onRemoveRequested($event)"
+        (refresh)="refresh()">
+      </app-korpa-stavka>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-section">
+      <h2>Naplata</h2>
+      <div class="summary-item">
+        <span>Ukupno</span>
+        <span>{{total}} RSD</span>
+      </div>
+      <div class="summary-item">
+        <span>Dostava</span>
+        <span>{{dostava}} RSD</span>
+      </div>
+      <div class="summary-item total">
+        <span>Ukupno</span>
+        <span>{{totaltotal}} RSD</span>
+      </div>
+      <button class="coupon-button" (click)="nastaviKaPlacanju()">Nastavi ka placanju</button>
+    </div>
+  </div>
+</div>
+<div class="dialog-overlay" *ngIf="showDialog">
+  <div class="dialog">
+    <p>Da li ste sigurni da želite da uklonite artikal iz korpe?</p>
+    <div class="dialog-buttons">
+      <button class="btn-confirm" (click)="confirmRemoval()">DA</button>
+      <button class="btn-cancel" (click)="cancelRemoval()">NE</button>
+    </div>
+  </div>
+</div>
+

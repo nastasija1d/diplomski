@@ -1,0 +1,49 @@
+<div class="container">
+  <form class="form">
+    <p class="title">Registruj se</p>
+    <div class="flex">
+      <label>
+        <input class="input"  id="ime" type="text" placeholder="" required="" >
+        <span>Ime</span>
+      </label>
+      <label>
+        <input class="input" id="prezime" type="text" placeholder="" required="">
+        <span>Prezime</span>
+      </label>
+    </div>
+    <label>
+      <input class="input" id="email" type="email" placeholder="" required="">
+      <span>Email</span>
+    </label>
+    <label>
+      <input class="input" id="lozinka" type="password" placeholder="" required="">
+      <span>Lozinka</span>
+    </label>
+    <label>
+      <input class="input" type="password" placeholder="" required="">
+      <span>Potvrdi lozinku</span>
+    </label>
+    <label>
+      <input class="input" id="telefon" type="number" placeholder="" required="">
+      <span>Telefon</span>
+    </label>
+    <div class="flex">
+      <label>
+        <input class="input" id="adresa" type="text" placeholder="" required="">
+        <span>Adresa</span>
+      </label>
+      <label>
+        <select class="input" id="grad" required="">
+          <option value="" disabled selected>Izaberi grad</option>
+          @for (grad of gradovi; track grad.naziv) {
+            <option [value]="grad.postanskiBroj">{{grad.naziv}}</option>
+          }
+        </select>
+        <span>Grad</span>
+      </label>
+    </div>
+    <button class="submit" (click)="registruj()">Potvrdi</button>
+    <p style="color: red;">{{errorMessage}}</p>
+    <p class="signin">Već imaš nalog? <a href="#">Uloguj se</a></p>
+  </form>
+</div>

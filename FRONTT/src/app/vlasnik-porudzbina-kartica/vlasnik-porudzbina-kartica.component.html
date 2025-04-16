@@ -1,0 +1,62 @@
+<div class="card" [class.expanded]="isExpanded">
+  <div class="card-content">
+    <div class="order-info">
+      <h5 style="min-width: 100px; text-align: left;">ID #{{porudzbina.idPorudzbina}} </h5>
+      <p *ngIf="!isExpanded" style="min-width: 220px;text-align: left; margin-top: 10px;">
+        <strong> Kupac:</strong> {{porudzbina.korisnik.ime}} {{porudzbina.korisnik.prezime}}
+      </p>
+      <p *ngIf="!isExpanded" style="min-width: 300px;text-align: left; margin-top: 10px;">
+        <strong> Ukupno:</strong> {{porudzbina.iznos}} RSD
+      </p>
+    </div>
+    <button (click)="toggleDetails()" style="min-width: 200px;" >
+      {{ isExpanded ? 'Show Less' : 'Show More' }}
+    </button>
+  </div>
+  <div *ngIf="isExpanded" class="extra-details">
+    <table>
+      <thead>
+        <tr>
+          <th>Naziv artikla</th>
+          <th>Grupa</th>
+          <th>Podgrupa</th>
+          <th>Marka</th>
+          <th>Proizvodjac</th>
+          <th>Kolicina</th>
+          <th>Jedinicna cena</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of porudzbina.artikli">
+          <td>{{ item.naziv }}</td>
+          <td>{{ item.vrsta }}</td>
+          <td>{{ item.podVrsta }}</td>
+          <td>{{ item.marka }}</td>
+          <td>{{ item.proizvodjac }}</td>
+          <td>{{ item.korpa }}</td>
+          <td>{{ item.cena_prodajna }} RSD</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="display: flex; flex-direction: row;">
+      <div class="user-info">
+        <p><strong>Kupac:</strong> {{porudzbina.korisnik.ime}} {{porudzbina.korisnik.prezime}} </p>
+        <p><strong>Telefon:</strong> {{porudzbina.korisnik.telefon}}</p>
+        <p><strong>Mejl:</strong> {{porudzbina.korisnik.email}}</p>
+      </div>
+      <div class="user-info">
+        <p><strong>Adresa:</strong> {{porudzbina.korisnik.adresa}}</p>
+        <p><strong>Grad:</strong> {{porudzbina.korisnik.grad}}</p>
+        <p><strong>Ukupno:</strong> {{porudzbina.iznos}} RSD</p>
+      </div>
+    </div>
+    <button class="button-img" (click)="posalji()">
+      <img src="vlasnik/shipped.png" alt="Show More">
+    </button>
+  </div>
+</div>
+
+<div *ngIf="showOverlay" class="overlay">
+  <img src="vlasnik/truck4.gif" alt="Loading Animation" class="loading-gif">
+  <h3>Porudžbina je uspešno poslata!</h3>
+</div>

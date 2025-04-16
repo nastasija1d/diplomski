@@ -1,0 +1,4 @@
+<div class="cart-container">
+  <img src="shoppingCart.png" alt="Cart" class="cart-image" />
+  <span class="cart-badge" *ngIf="(itemCount$ | async) as count">{{ count }}</span>
+</div>
