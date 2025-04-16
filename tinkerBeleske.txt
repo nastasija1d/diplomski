@@ -1,0 +1,198 @@
+POKRETANJE:
+  ssh root@88.198.64.58
+  docker exec -it php_cheque-poc bash
+  php artisan tinker
+
+DOHVATANJE SVIH MODELA I METODA:
+  $methods = get_class_methods(App\Models\Transaction::class)
+  $models = glob(app_path('Models').'/*.php')
+
+
+PISANJE UPITA:
+  $partner = Partner::find(24)
+  $orders = $partner->activeorders
+
+  $trans = Transaction::orderBy('created_at','desc')->take(5)->get()
+
+
+
+
+
+
+----------------M O D E L S---------------------
+[
+	"Admin.php",
+	"Allergen.php",
+	"AllergenData.php",
+	"AvailabilityType.php",
+	"Category.php",
+	"CategoryAvailability.php",
+	"CategoryData.php",
+	"Country.php",
+	"CountryCode.php",
+	"Currency.php",
+	"DateFormat.php",
+	"ExternalService.php",
+	"ExternalServiceAllergen.php",
+	"ExternalServiceCategory.php",
+	"ExternalServiceItem.php",
+	"ExternalServiceItemGroup.php",
+	"ExternalServiceItemGroupOption.php",
+	"ExternalServicePartner.php",
+	"ExternalServiceSection.php",
+	"ExternalServiceTable.php",
+	"ExternalServiceType.php",
+	"Feedback.php",
+	"FeedbackRating.php",
+	"FeedbackRatingType.php",
+	"FontFamily.php",
+	"HelpRequest.php",
+	"Interval.php",
+	"Item.php",
+	"ItemAllergens.php",
+	"ItemAvailability.php",
+	"ItemData.php",
+	"ItemGroup.php",
+	"ItemGroupData.php",
+	"ItemGroupOption.php",
+	"ItemGroupOptionData.php",
+	"ItemGroupType.php",
+	"Language.php",
+	"Order.php",
+	"OrderDeliveryStatus.php",
+	"OrderItem.php",
+	"OrderItemOption.php",
+	"OrderItemPickupStatus.php",
+	"OrderItemStatus.php",
+	"OrderPickupStatus.php",
+	"OrderServiceType.php",
+	"OrderSession.php",
+	"OrderStatus.php",
+	"Partner.php",
+	"PartnerData.php",
+	"PartnerDebt.php",
+	"PartnerDebtCollection.php",
+	"PartnerPaymentType.php",
+	"PartnerSocialMedia.php",
+	"PartnerStyle.php",
+	"PartnerType.php",
+	"PaymentTender.php",
+	"PaymentType.php",
+	"Payout.php",
+	"PayoutStatus.php",
+	"Personnel.php",
+	"PersonnelOccupation.php",
+	"PersonnelStatus.php",
+	"PhoneNumber.php",
+	"Pos.php",
+	"PosCategory.php",
+	"PosItem.php",
+	"PosPersonnel.php",
+	"PosSection.php",
+	"PosTable.php",
+	"PromoCode.php",
+	"Referrer.php",
+	"RefundStatus.php",
+	"ScheduleGroup.php",
+	"ScheduleGroupInterval.php",
+	"ScheduleGroupItem.php",
+	"Section.php",
+	"SectionType.php",
+	"Shift.php",
+	"ShiftStatus.php",
+	"SocialMedia.php",
+	"SquareUpCategory.php",
+	"SquareUpItem.php",
+	"SquareUpItemVariation.php",
+	"StripeStatus.php",
+	"Table.php",
+	"TablePaymentTender.php",
+	"TablePaymentType.php",
+	"TableSession.php",
+	"TableStatus.php",
+	"TableType.php",
+	"TimeFormat.php",
+	"TimeZone.php",
+	"TimeZone2.php",
+	"Transaction.php",
+	"TransactionStatus.php",
+	"TransactionType.php",
+	"User.php",
+	"WorkingHours.php",
+	"WorkingSession.php"
+]
+
+App\Models\Order {#6631
+        id: 12021,
+        order_number: null,
+        parent_id: 12020,
+        order_status_id: {
+		[1,"In Progress"],
+		[2,"Awaiting Cash Payment"],
+		[3,"Paid"],
+		[4,"Completed"],
+		[5,"Canceled"],
+		[6,"Refunded"],
+		[7,"Created by Waiter"],
+		[8,"Partially Refunded"],
+		[9,"Order Accepted"]
+		}
+        partner_id: 24,
+        manager_id: null,
+        personnel_id: null,
+        table_id: "9e6c13fd-af47-4b0d-9b9c-0e5f7a4440a2",
+        payment_tender_id: {
+		[1, "Cash"],
+    		[2, "Card"],
+    		[3, "Mix"]
+		}
+        payment_type_id:{
+		[1, "Upfront"],
+    		[2, "On Demand"],
+    		[3, "Pick up"]
+		}
+        currency_id: 2,
+        promo_code_id: null,
+        working_session_id: 628,
+        note: null,
+        total: 120000,
+        subtotal: 120000,
+        total_refund: 0,
+        total_no_commission: 117074,
+        cart_total: 0,
+        cart_total_no_commission: 0,
+        commissioned: 0,
+        stripe_id: null,
+        stripe_status_id:{
+		[1, "Placed"],
+    		[2, "Failed"],
+    		[3, "Captured"],
+    		[4, "Reserved"]
+		}
+        tip_amount: 0,
+        paid_by_order_id: null,
+        created_at: "2025-04-08 09:44:40",
+        updated_at: "2025-04-08 10:47:02",
+        session_id: null,
+        invoice_id: null,
+        transaction_id: 3651,
+        closed: 1,
+        pickup_status_id:{
+		[1, "Payment Pending"],
+    		[2, "Pending"],
+    		[3, "Ready"],
+    		[4, "Delivered"]
+		}
+        delivery_status_id: {
+		[1, "In Progress"],
+    		[2, "Awaiting Cash Payment"]
+		}
+        worldpay_transaction_id: "t1_txn_67f4f008e60f6805beb610f",
+        snapshot: 
+	service_type_id: null,
+        last_updated_by_id: null,
+        refund_status_id: 1,
+        customer_name: "N A",
+        phone_number: null,
+        subtotal_j: 120000,
+        tip_amount_j: 0,
