@@ -1,0 +1,28 @@
+<div class="chart-container" [style.width.px]="width+200" [style.height.px]="height + legendHeight">
+    <svg [attr.width]="width" [attr.height]="height" class="pie-svg">
+      <g [attr.transform]="'translate(' + width/2 + ',' + height/2 + ')'">
+        <path
+          *ngFor="let arc of arcs; let i = index"
+          [attr.d]="describeArc(0, 0, getRadius(i), arc.startAngle, arc.endAngle)"
+          [attr.fill]="arc.color"
+          (mouseenter)="onMouseEnter($event,i)"
+          (mouseleave)="onMouseLeave()"
+          class="pie-segment">
+        </path>
+      </g>
+    </svg>
+  
+    <div
+        class="tooltip"
+        *ngIf="hoveredIndex !== null"
+        [ngStyle]="{ top: tooltipY + 'px', left: tooltipX + 'px' }">
+        {{ arcs[hoveredIndex].label }}: {{ arcs[hoveredIndex].value }}
+    </div>
+  
+    <div class="legend">
+      <div *ngFor="let arc of arcs" class="legend-item">
+        <span class="color-box" [style.background]="arc.color"></span>
+        {{ arc.label }} ({{ arc.value }})
+      </div>
+    </div>
+  </div>

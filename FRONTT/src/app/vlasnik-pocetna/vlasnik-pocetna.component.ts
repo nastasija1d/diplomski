@@ -21,7 +21,7 @@ export class VlasnikPocetnaComponent implements OnInit {
       title: 'Finansije',
       image: 'vlasnik/bar-chart.png',
       description: 'Pregledaj sve prethodne porudzbine i finansije',
-      link: '/orders',
+      link: '/vlasnik/finansije',
     },
     {
       title: 'Lager',

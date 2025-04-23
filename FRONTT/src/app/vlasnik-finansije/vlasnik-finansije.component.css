@@ -1,0 +1,50 @@
+.dashboard-container {
+    margin-top: 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content:center;
+  }
+  
+  /* Pie-chart container */
+  .pie-wrapper {
+    background-color: #333;    
+    padding: 16px;
+    margin-right: 150px;      
+    border-radius: 18px;
+    width: 600px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Pie-chart controls (buttons) */
+  .pie-controls {
+    display: flex;
+    justify-content:flex-start;
+    margin-bottom: 16px;
+  }
+  
+  .pie-btn { 
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #00bfff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .pie-btn:hover {
+    background-color: #00bfff;
+    color: #fff;
+  }
+  
+  .pie-chart {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+  }
+  
+ 

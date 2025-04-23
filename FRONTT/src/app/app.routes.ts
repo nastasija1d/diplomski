@@ -10,6 +10,7 @@ import { VlasnikPocetnaComponent } from './vlasnik-pocetna/vlasnik-pocetna.compo
 import { VlasnikAktivnePorudzbineComponent } from './vlasnik-aktivne-porudzbine/vlasnik-aktivne-porudzbine.component';
 import { VlasnikDodajArtikalComponent } from './vlasnik-dodaj-artikal/vlasnik-dodaj-artikal.component';
 import { VlasnikLagerComponent } from './vlasnik-lager/vlasnik-lager.component';
+import { VlasnikFinansijeComponent } from './vlasnik-finansije/vlasnik-finansije.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/pocetna', pathMatch: 'full' },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'korpa', component: KorpaComponent },
   { path: 'pregled-porudzbine', component: PregledPorudzbineComponent },
   { path: 'vlasnik/pocetna', component: VlasnikPocetnaComponent },
+  { path: 'vlasnik/finansije', component: VlasnikFinansijeComponent },
   {
     path: 'vlasnik/aktivne-porudzbine',
     component: VlasnikAktivnePorudzbineComponent,

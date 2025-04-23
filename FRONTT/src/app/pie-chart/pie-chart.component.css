@@ -1,0 +1,54 @@
+.chart-container {
+    position: relative;
+    overflow: visible;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .pie-svg {
+    display: block;
+    overflow: visible;
+  }
+  
+  .pie-segment {
+    transition: r 0.2s ease;
+  }
+  
+  .tooltip {
+    position: fixed;
+    z-index: 10000;
+    transform: translate(-50%, -120%); /* da stoji iznad kursora */
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    padding: .3rem .6rem;
+    border-radius: .3rem;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  
+  .legend {
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.344);
+    border-radius: 15px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    font-size: 0.7rem;
+  }
+  
+  .color-box {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    border: 1px solid #ccc;
+  }
