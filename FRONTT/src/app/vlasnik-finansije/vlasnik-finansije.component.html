@@ -1,19 +1,40 @@
 <div class="dashboard-container">
-    <!-- Left side: pie chart + controls -->
-    <div class="pie-wrapper">
-      <div class="pie-controls">
-        <button class="pie-btn">Marka</button>
-        <button class="pie-btn">Proizvođač</button>
-        <button class="pie-btn">Kategorija</button>
-      </div>
+  <div class="tabs-container">
+    <div class="tabs">
+      <button  class="tab-button" [class.active]="activeTab === 'kategorija'" (click)="setActiveTab('kategorija')">
+        Kategorija
+      </button>
+      <button
+        class="tab-button" [class.active]="activeTab === 'brend'" (click)="setActiveTab('brend')">
+        Brend
+      </button>
+      <button
+        class="tab-button" [class.active]="activeTab === 'proizvodjac'" (click)="setActiveTab('proizvodjac')">
+        Proizvođač
+      </button>
+    </div>
+
+    <div *ngIf="activeTab === 'kategorija'" class="tab-content">
       <div class="pie-chart">
-        <app-pie-chart [data]="[['Marka A', 10], ['Marka B', 20], ['Marka C', 5], ['Marka D', 15], ['Marka E', 25], ['Marka F', 20]]"></app-pie-chart>
+        <app-pie-chart [data]="kategorija"></app-pie-chart>
       </div>
     </div>
+    <div *ngIf="activeTab === 'brend'" class="tab-content">
+      <div class="pie-chart">
+        <app-pie-chart [data]="marka"></app-pie-chart>
+      </div>
+    </div>
+    <div *ngIf="activeTab === 'proizvodjac'" class="tab-content">
+      <div class="pie-chart">
+        <app-pie-chart [data]="proizvodjac"></app-pie-chart>
+      </div>
+    </div>
+  </div>
   
     <!-- Right side: calendar -->
     <div class="calendar-wrapper">
-      <app-calendar></app-calendar>
+      <app-calendar (datumiChange)="onDatumiChanged($event)"></app-calendar>
+      <button class="save-btn" (click)="prikazi()">Prikazi</button>
     </div>
   </div>
   

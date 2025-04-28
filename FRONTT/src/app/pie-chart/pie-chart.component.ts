@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Proizvodjac } from '../1models/proizvodjac';
 
 @Component({
   selector: 'app-pie-chart',
@@ -9,12 +10,18 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   styleUrl: './pie-chart.component.css'
 })
 export class PieChartComponent implements OnChanges {
-  @Input() data: [string, number][] = [];
+  @Input() data: Proizvodjac[] = [];
   @Input() width = 400;
   @Input() height = 400;
-
-  colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#8AFFC1', '#FF8A5C', '#A9A9FF'];
-  arcs: Array<{ startAngle: number; endAngle: number; color: string; label: string; value: number }> = [];
+  colors = [
+    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#8AFFC1', '#FF8A5C', '#A9A9FF',
+    '#00CED1', '#FFD700', '#ADFF2F', '#FF4500', '#8A2BE2', '#00FA9A', '#DC143C', '#7B68EE', '#00BFFF',
+    '#FFDAB9', '#20B2AA', '#9370DB', '#3CB371', '#FFA07A', '#6A5ACD', '#48D1CC', '#C71585', '#FF6347',
+    '#1E90FF', '#32CD32', '#BA55D3', '#66CDAA', '#FFB6C1', '#8B008B', '#40E0D0', '#FF7F50', '#7FFF00',
+    '#D2691E', '#87CEFA', '#6B8E23', '#FF1493', '#4169E1', '#00FF7F', '#B22222', '#DA70D6', '#5F9EA0',
+    '#FFA500', '#228B22', '#DB7093', '#4682B4', '#9ACD32', '#F08080'
+  ];
+  arcs: Array<{ startAngle: number; endAngle: number; color: string; naziv: string; broj: number }> = [];
 
   hoveredIndex: number | null = null;
   legendHeight = 60;
@@ -28,11 +35,17 @@ export class PieChartComponent implements OnChanges {
   }
 
   private calculateArcs() {
-    const total = this.data.reduce((sum, [, v]) => sum + v, 0);
+    const total = this.data.reduce((sum, item) => sum + item.broj, 0);
     let acc = 0;
-    this.arcs = this.data.map(([label, value], i) => {
-      const slice = (value / total) * 360;
-      const arc = { startAngle: acc, endAngle: acc + slice, color: this.colors[i % this.colors.length], label, value };
+    this.arcs = this.data.map((item, i) => {
+      const slice = (item.broj / total) * 360;
+      const arc = {
+        startAngle: acc,
+        endAngle: acc + slice,
+        color: this.colors[i % this.colors.length],
+        naziv: item.naziv,
+        broj: item.broj
+      };
       acc += slice;
       return arc;
     });
@@ -51,7 +64,6 @@ export class PieChartComponent implements OnChanges {
   }
 
   onMouseEnter(event: MouseEvent, idx: number) {
-    console.log(event);
     this.hoveredIndex = idx;
     this.tooltipX = event.clientX;
     this.tooltipY = event.clientY;

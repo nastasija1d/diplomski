@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-calendar',
@@ -19,6 +19,8 @@ export class CalendarComponent implements OnInit {
   datumOD: Date | null = null;
   datumDO: Date | null = null;
 
+  @Output() datumiChange = new EventEmitter<{ datumOD: string | null, datumDO: string | null }>();
+
 
   weekdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
   monthNames = [
@@ -32,6 +34,8 @@ export class CalendarComponent implements OnInit {
     this.currentMonth = today.getMonth();
     // pre-select today as datumOD
     this.datumOD = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    this.datumDO = null;
+    this.emitDatumi();
     this.generateCalendar();
   }
 
@@ -79,7 +83,7 @@ export class CalendarComponent implements OnInit {
 
   nextMonth() {
     if (this.currentYear === this.todayYear && this.currentMonth === this.todayMonth) {
-      return; // do not go into the future
+      return; 
     }
     if (this.currentMonth === 11) {
       this.currentMonth = 0;
@@ -111,6 +115,7 @@ export class CalendarComponent implements OnInit {
         this.datumDO = clicked;
       }
     }
+    this.emitDatumi();
   }
 
   // helper to style cells in the selected range
@@ -135,8 +140,22 @@ export class CalendarComponent implements OnInit {
         && this.datumDO.getFullYear()=== this.currentYear;
   }
 
-  save() {
-    console.log('Datum OD:', this.datumOD);
-    console.log('Datum DO:', this.datumDO);
+  private emitDatumi() {
+    const datumODstr = this.datumOD ? this.toYYYYMMDD(this.datumOD) : null;
+    const datumDOstr = this.datumDO ? this.toYYYYMMDD(this.datumDO) : datumODstr; // <<< OVDE JE BITNO
+  
+    this.datumiChange.emit({
+      datumOD: datumODstr,
+      datumDO: datumDOstr
+    });
   }
+  
+  private toYYYYMMDD(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+
 }
