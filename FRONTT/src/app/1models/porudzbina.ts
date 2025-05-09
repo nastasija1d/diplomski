@@ -6,7 +6,7 @@ export class Porudzbina {
   korisnik: Korisnik;
   datum: Date;
   iznos: number;
-  idstatus: number;
+  idStatus: number;
   artikli: Artikal[];
 
   constructor(
@@ -21,7 +21,7 @@ export class Porudzbina {
     this.korisnik = korisnik;
     this.datum = datum;
     this.iznos = iznos;
-    this.idstatus = idstatus;
+    this.idStatus = idstatus;
     this.artikli = artikli;
   }
 }

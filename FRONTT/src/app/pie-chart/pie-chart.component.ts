@@ -24,6 +24,7 @@ export class PieChartComponent implements OnChanges {
   arcs: Array<{ startAngle: number; endAngle: number; color: string; naziv: string; broj: number }> = [];
 
   hoveredIndex: number | null = null;
+  tooltipVisible = false;
   legendHeight = 60;
   tooltipX = 0;
   tooltipY = 0;
@@ -35,8 +36,22 @@ export class PieChartComponent implements OnChanges {
   }
 
   private calculateArcs() {
+    this.arcs = [];
     const total = this.data.reduce((sum, item) => sum + item.broj, 0);
     let acc = 0;
+    if (this.data.length === 1) {
+      const item = this.data[0];
+      // Prvi polukrug: 0°–180°
+      this.arcs.push({
+        startAngle: 0,
+        endAngle: 359.9999,
+        color: this.colors[0],
+        naziv: item.naziv,
+        broj: item.broj
+      });
+      
+      return;
+    }
     this.arcs = this.data.map((item, i) => {
       const slice = (item.broj / total) * 360;
       const arc = {
@@ -65,12 +80,20 @@ export class PieChartComponent implements OnChanges {
 
   onMouseEnter(event: MouseEvent, idx: number) {
     this.hoveredIndex = idx;
+    this.tooltipVisible = true;
     this.tooltipX = event.clientX;
     this.tooltipY = event.clientY;
   }
 
   onMouseLeave() {
     this.hoveredIndex = null;
+    this.tooltipVisible = false;
+  }
+
+  
+  moveTooltip(event: MouseEvent) {
+    this.tooltipX = event.clientX + 10; // 10px desno od pokazivača
+    this.tooltipY = event.clientY + 10; // 10px dole od pokazivača
   }
 
   getRadius(idx: number): number {

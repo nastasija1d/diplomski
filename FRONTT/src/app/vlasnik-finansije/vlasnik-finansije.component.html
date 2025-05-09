@@ -29,6 +29,76 @@
         <app-pie-chart [data]="proizvodjac"></app-pie-chart>
       </div>
     </div>
+
+
+    <!-- Ovo je neka dodatna statistika -->
+     <div *ngIf="prikaziTabele==true">
+      <h5 style="margin-bottom: 30px;">
+        Prikaz za period: {{datumOD| date:'dd MMM yyyy'}} do {{datumDO| date:'dd MMM yyyy'}}
+      </h5>
+      <div style="display: flex; flex-direction: column; text-align: left; padding: 30px;">
+        <p><b>Ukupno prodatih artikala: </b> {{ukupnoProdato | number:'1.0-0':'en'}}</p>
+        <p><b>Ukupna zarada: </b> {{ukupnoZarada | number:'1.0-0':'en'}} RSD</p>
+        
+        <!-- TABELA SA SVIM PORUDZBINAMA -->
+         <p style="width: 100%;text-align: center; margin-top: 30px;"><b>Sve porudzbine</b></p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Korisnik</th>
+              <th>Grad</th>
+              <th>Datum</th>
+              <th>Broj artikala</th>
+              <th>Ukupan iznos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of prikazanePorudzbine">
+              <td>{{ p.idPorudzbina }}</td>
+              <td>{{ p.korisnik.ime }} {{ p.korisnik.prezime }}</td>
+              <td>{{ p.korisnik.grad }}</td>
+              <td>{{ p.datum | date:'dd.MM.yyyy' }}</td>
+              <td>{{ p.idStatus }}</td>
+              <td>{{ p.iznos| number:'1.0-0' }} RSD</td>
+            </tr>
+          </tbody>
+        </table>
+        <button *ngIf="porudzbine.length > 5" class="dugme" (click)="prikaziSve = !prikaziSve">
+          {{ prikaziSve ? 'Prikaži manje' : 'Prikaži više' }}
+        </button>
+
+        <!-- TABELA SA SVIM ARTIKLIMA -->
+         <p style="width: 100%;text-align: center; margin-top: 40px;"><b>Svi poruceni artikli</b></p>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Naziv</th>
+              <th>Podvrsta</th>
+              <th>Brend</th>
+              <th>Proizvodjac</th>
+              <th>Cena</th>
+              <th>Prodato</th>
+              <th>Lager</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of prikazaniArtikli">
+              <td>{{ a.naziv}}</td>
+              <td>{{ a.podVrsta }}</td>
+              <td>{{ a.marka }}</td>
+              <td>{{ a.proizvodjac }}</td>
+              <td>{{ a.cena_prodajna| number:'1.0-0' }} RSD</td>
+              <td>{{ a.cena_nabavna }}</td>
+              <td>{{ a.kolicina }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button *ngIf="artikli.length > 5" class="dugme" (click)="prikaziSveArtikle = !prikaziSveArtikle">
+          {{ prikaziSveArtikle ? 'Prikaži manje' : 'Prikaži više' }}
+        </button>
+      </div>
+    </div>
   </div>
   
     <!-- Right side: calendar -->

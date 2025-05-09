@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.db.dao.VlasnikRepo;
+import com.example.backend.models.Artikal;
+import com.example.backend.models.Porudzbina;
+import com.example.backend.models.PorudzbinaInfo;
 import com.example.backend.models.Proizvodjac;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +34,16 @@ public class VlasnikController {
     @GetMapping("/finansije/kategorija")
     public List<Proizvodjac> getByKategorija(@RequestParam String datumOD, @RequestParam String datumDO) {
         return new VlasnikRepo().getByKategorija(datumOD, datumDO);
+    }
+
+    @GetMapping("/finansije/porudzbine")
+    public List<PorudzbinaInfo> getAllPorudzbine(@RequestParam String datumOD, @RequestParam String datumDO) {
+        return new VlasnikRepo().getAllPorudzbine(datumOD, datumDO);
+    }
+
+    @GetMapping("finansije/artikli")
+    public List<Artikal> getArtikle(@RequestParam String datumOD, @RequestParam String datumDO) {
+        return new VlasnikRepo().getArtikle(datumOD, datumDO);
     }
     
     

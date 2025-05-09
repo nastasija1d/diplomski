@@ -62,8 +62,8 @@
     background-color: #333;    
     margin-right: 50px; 
     margin-left: 300px;   
-    width: 700px;
-    height: 550px;
+    width: 900px;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -119,6 +119,43 @@
 
   .save-btn:hover {
     background-color: #00bfff;
+  }
+
+  .calendar-wraper{
+    position: fixed;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    
+    background-color: #333;
+    color: #fff;
+  }
+  
+  th {
+    background-color: #00bfff;
+    color: white;
+  }
+
+  .dugme{
+    background-color: transparent;
+    color: #ffffff6e;
+    border: none;
+    margin-bottom: 20px;
+  }
+
+  .dugme:hover{
+    color: #fff;
   }
   
   

@@ -1,4 +1,9 @@
-<div class="chart-container" [style.width.px]="width+400" [style.height.px]="height + legendHeight">
+<div *ngIf="data.length === 0" class="empty-message">
+    Nema porudzbina za uneti period
+</div>
+  
+<div *ngIf="data.length > 0">
+  <div class="chart-container" [style.width.px]="width+400" [style.height.px]="height + legendHeight">
     <svg [attr.width]="width" [attr.height]="height" class="pie-svg">
       <g [attr.transform]="'translate(' + width/2 + ',' + height/2 + ')'">
         <path
@@ -6,17 +11,17 @@
           [attr.d]="describeArc(0, 0, getRadius(i), arc.startAngle, arc.endAngle)"
           [attr.fill]="arc.color"
           (mouseenter)="onMouseEnter($event,i)"
+          (mousemove)="moveTooltip($event)"
           (mouseleave)="onMouseLeave()"
           class="pie-segment">
         </path>
       </g>
     </svg>
-  
-    <div
-        class="tooltip"
-        *ngIf="hoveredIndex !== null"
-        [ngStyle]="{ top: tooltipY + 'px', left: tooltipX + 'px' }">
-        {{ arcs[hoveredIndex].naziv }}: {{ arcs[hoveredIndex].broj }}
+
+    <div *ngIf="tooltipVisible"
+      [ngStyle]="{'position': 'fixed', 'top.px': tooltipY, 'left.px': tooltipX, 'background': '#333',  'color': '#fff', 
+      'padding': '5px 10px', 'border-radius': '4px', 'pointer-events': 'none', 'z-index': 1000, 'font-size': '14px' }">
+      {{data[hoveredIndex].naziv}} ({{data[hoveredIndex].broj}})
     </div>
   
     <div class="legend">
@@ -26,3 +31,5 @@
       </div>
     </div>
   </div>
+
+</div>

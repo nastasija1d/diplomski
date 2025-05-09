@@ -1,0 +1,28 @@
+VLASNIK FINANSIJE
+- ispis poruke kada nema porudzbina za taj dan
+- iscrtavanje grafika za samo 1 
+- ispis na hover pie-charta
+- fiksirati calendar
+- legenda skrolabilna
+	-dodati natpis za koj period se prikazuje
+	-ukupno prodatih artikala
+	-ukupna zarada
+	- cista zarada (prodajna-nabavna)
+	-najskuplji artikl
+	-najprodavaniji
+	-lista svih prodatih artikala za taj period (ako je u dve odvojene porudzbine porucen isti artikl, kolicina prodatih je 2)
+
+grafik o prihodu po danima????
+
+---------------------------------------------------------
+
+VLASNIK LAGER
+- padajuce liste za sve moguce kriterijume(kategorija >podkategorija,marka,proizvodjac)
+- obojiti tamnijom bojom one koji nisu na stanju
+- sort opcija (cena, naziv, marka, proizvodjac, podkategorija)
+- prev i next page
+
+- odabir Koliko se artikala prikazuje po stranici??
+
+
+jedna veeelika tabela koja sadrzi sve podatke o artiklima
