@@ -1,0 +1,31 @@
+<section class="best-sellers-section">
+  <h2 class="section-title">Najprodavaniji proizvodi</h2>
+
+  <div class="carousel-wrapper">
+    <button class="carousel-btn prev" (click)="scrollLeft()">‹</button>
+
+    <!-- ovo je container koji scrolluje -->
+    <div class="product-carousel" #carousel>
+      <div
+        class="product-card reveal"
+        *ngFor="let product of bestSellers; let i = index"
+        #cardRef
+      >
+        <div class="product-image-wrapper">
+          <img [src]="'http://localhost:8080/slika/podgrupa/' + product.podVrsta.replace(' ', '_')" 
+               [alt]="product.naziv" />
+        </div>
+        <div class="product-details">
+          <h3>{{ product.naziv }}</h3>
+          <p><strong>Grupa:</strong> {{ product.vrsta }}</p>
+          <p><strong>Podgrupa:</strong> {{ product.podVrsta }}</p>
+          <p><strong>Brend:</strong> {{ product.marka }}</p>
+          <p><strong>Proizvođač:</strong> {{ product.proizvodjac }}</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-btn next" (click)="scrollRight()">›</button>
+  </div>
+</section>
+

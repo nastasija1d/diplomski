@@ -3,6 +3,7 @@ package com.example.backend.db.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,6 +95,7 @@ public class VlasnikRepo {
         }
     }
 
+    //dohvata sve porudzbine u odredjenom intervalu
     public List<PorudzbinaInfo> getAllPorudzbine(String datumOD, String datumDO) {
         try (Connection con = DB.source().getConnection()) {
             PreparedStatement ps = con
@@ -136,6 +138,7 @@ public class VlasnikRepo {
     
     }
 
+    //dohvata sve artikle koji su poruceni u odredjenom intervalu
     public List<Artikal> getArtikle(String datumOD, String datumDO) {
         try (Connection conn = DB.source().getConnection();
                 PreparedStatement ps = conn.prepareStatement(
@@ -172,5 +175,74 @@ public class VlasnikRepo {
         }
         return null;
     }
-    
+   
+    //filtrira artikle po raznim parametrima
+    public List<Artikal> filtrirajArtikle(String grupa, String podgrupa, String proizvodjac, String marka,
+            String sortBy, int page, int size) {
+
+        StringBuilder sql = new StringBuilder(
+            "SELECT a.idArtikl, a.naziv, v.naziv AS vrsta, pv.naziv AS podvrsta, " +
+            "pr.naziv AS proizvodjac, m.naziv AS marka, a.kolicina, a.cena_p, a.cena_n " +
+            "FROM artikl a " +
+            "INNER JOIN podvrsta pv ON a.idpodvrsta = pv.idpodvrsta " +
+            "INNER JOIN vrsta v ON pv.idvrsta = v.idVrsta " +
+            "INNER JOIN proizvodjac pr ON a.idproizvodjac = pr.idProizvodjac " +
+            "INNER JOIN marka m ON a.idmarka = m.idmarka " +
+            "WHERE 1=1"
+        );
+
+        List<Object> params = new ArrayList<>();
+
+        if (grupa != null && !grupa.isEmpty()) {
+            sql.append(" AND v.naziv = ?");
+            params.add(grupa);
+        }
+        if (podgrupa != null && !podgrupa.isEmpty()) {
+            sql.append(" AND pv.naziv = ?");
+            params.add(podgrupa);
+        }
+        if (proizvodjac != null && !proizvodjac.isEmpty()) {
+            sql.append(" AND pr.naziv = ?");
+            params.add(proizvodjac);
+        }
+        if (marka != null && !marka.isEmpty()) {
+            sql.append(" AND m.naziv = ?");
+            params.add(marka);
+        }
+
+        sql.append(" ORDER BY ").append(sortBy).append(" ASC");
+
+        // Pagination
+        sql.append(" LIMIT ? OFFSET ?");
+        params.add(size);
+        params.add(page * size);
+
+        try (Connection conn = DB.source().getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            List<Artikal> lista = new ArrayList<>();
+            while (rs.next()) {
+                lista.add(new Artikal(
+                    rs.getInt("idArtikl"),
+                    rs.getString("naziv"),
+                    rs.getString("proizvodjac"),
+                    rs.getString("marka"),
+                    rs.getString("vrsta"),
+                    rs.getString("podvrsta"),
+                    rs.getInt("kolicina"),
+                    rs.getInt("cena_p"),
+                    rs.getInt("cena_n")
+                ));
+            }
+            return lista;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Greška prilikom filtriranja artikala", e);
+        }
+    }
 }

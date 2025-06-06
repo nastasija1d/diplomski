@@ -1,0 +1,9 @@
+<div class="card">
+  <img [src]="slika" alt="podgrupa" class="card-image" />
+  <div class="card-content">
+    <h2><a [routerLink]="['/artikal', item.id]" class="text-title">{{item.naziv}}</a></h2>
+    <p>{{ item.proizvodjac }} • {{ item.marka }}</p>
+    <p>{{ item.vrsta }} > {{ item.podVrsta }}</p>
+  </div>
+  <div class="card-price">{{ item.cena_prodajna }} RSD</div>
+</div>

@@ -16,6 +16,10 @@ export class ArtikalService {
     return this.http.get<Artikal[]>(this.urlString + '/artikal/svi');
   }
 
+  getBestSellers(){
+    return this.http.get<Artikal[]>(this.urlString + '/artikal/najprodavaniji');
+  }
+
   //dohvatanje artikla po ID
   getById(id: string) {
     return this.http.get<Artikal>(this.urlString + '/artikal/' + id);
@@ -64,5 +68,12 @@ export class ArtikalService {
     return this.http.get<string[]>(
       this.urlString + '/parametri/vrsta/' + grupa
     );
+  }
+
+  pretraziArtikle(query: string) {
+    let params = new HttpParams().set('query', query);
+    return this.http.get<Artikal[]>(this.urlString + '/artikal/search', {
+      params,
+    });
   }
 }

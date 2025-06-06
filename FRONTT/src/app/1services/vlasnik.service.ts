@@ -48,6 +48,28 @@ export class VlasnikService {
     return this.http.get<Artikal[]>(this.url + 'finansije/artikli', { params: param });
   }
 
+  //filtriranje artikala po parametrima
+  filtrirajArtikle(
+    vrsta: string | null,
+    podvrsta: string | null,
+    marka: string | null,
+    proizvodjac: string | null,
+    sortBy: string | null,
+    page: number | null,
+    size: number | null
+  ) {
+    let params = new HttpParams();
+    if (sortBy) params = params.set('sortBy', sortBy);
+    if (vrsta) params = params.set('vrsta', vrsta);
+    if (podvrsta) params = params.set('podvrsta', podvrsta);
+    if (marka) params = params.set('marka', marka);
+    if (proizvodjac) params = params.set('proizvodjac', proizvodjac);
+    if (page) params = params.set('page', page.toString());
+    if (size) params = params.set('size', size.toString());
+
+    return this.http.get<Artikal[]>(this.url + 'lager', { params });
+  }
+
   
   
 }

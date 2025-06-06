@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.example.backend.db.DB;
 import com.example.backend.models.Artikal;
@@ -259,6 +262,111 @@ public class ArtikalRepo {
         } catch (Exception e) {
             return 0;
         }
+    }
+
+    public List<Artikal> pretraga(String query){
+        String[] words = query.toLowerCase().split("\\s+");
+
+    // 1. SQL: napravi WHERE sa OR za sve reči
+    StringBuilder sql = new StringBuilder(
+        "SELECT artikl.idArtikl, artikl.naziv, proizvodjac.naziv, " +
+        "marka.naziv, vrsta.naziv, podVrsta.naziv, artikl.kolicina, artikl.cena_p, artikl.cena_n, artikl.search " +
+        "FROM artikl " +
+        "INNER JOIN proizvodjac ON artikl.idproizvodjac = proizvodjac.idProizvodjac " +
+        "INNER JOIN marka ON artikl.idmarka = marka.idmarka " +
+        "INNER JOIN podvrsta ON artikl.idpodvrsta = podvrsta.idpodvrsta " +
+        "INNER JOIN vrsta ON vrsta.idVrsta = podvrsta.idvrsta "
+    );
+
+    List<Object> params = new ArrayList<>();
+    if (words.length > 0) {
+        sql.append("WHERE ");
+        
+        List<String> likeClauses = new ArrayList<>();
+        for (String word : words) {
+            likeClauses.add("LOWER(artikl.search) LIKE ?");
+            params.add("%" + word + "%");
+        }
+        sql.append(String.join(" OR ", likeClauses));
+        
+    }
+
+    sql.append(" ORDER BY artikl.naziv LIMIT 800");
+
+    try (Connection conn = DB.source().getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+
+        for (int i = 0; i < params.size(); i++) {
+            ps.setString(i + 1, (String) params.get(i));
+        }
+
+        ResultSet rs = ps.executeQuery();
+        List<Artikal> lista = new ArrayList<>();
+
+        // 2. Regex: pripremi pozitivan lookahead za sve reči
+        String regex = Arrays.stream(words)
+            .map(Pattern::quote)
+            .map(w -> "(?=.*" + w + ")")
+            .collect(Collectors.joining("")) + ".*";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        while (rs.next()) {
+            String searchText = rs.getString(10).toLowerCase(); // artikl.search
+
+            if (pattern.matcher(searchText).find()) {
+                lista.add(new Artikal(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9)));
+            }
+        }
+System.out.println(ps.toString());
+        return lista;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+    }
+
+    public List<Artikal> najprodavaniji() {
+        try (Connection conn = DB.source().getConnection();
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT artikl.idArtikl, artikl.naziv, proizvodjac.naziv, \n" +
+                    "marka.naziv, vrsta.naziv, podVrsta.naziv, artikl.kolicina, artikl.cena_p, artikl.cena_n\n"
+                    +
+                    "FROM artikl inner join proizvodjac on artikl.idproizvodjac = proizvodjac.idProizvodjac\n"
+                    +
+                    "inner join marka on artikl.idmarka=marka.idmarka\n" +
+                    "inner join podvrsta on artikl.idpodvrsta=podvrsta.idpodvrsta\n" +
+                    "inner join vrsta on vrsta.idVrsta = podvrsta.idvrsta\n" + //
+                    "order by artikl.cena_n, artikl.cena_p \n" +
+                    "limit 10")) {
+                ResultSet rs = ps.executeQuery();
+                List<Artikal> lista = new ArrayList<>();
+                while (rs.next()) {
+                    lista.add(new Artikal(
+                            rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getInt(7),
+                            rs.getInt(8),
+                            rs.getInt(9)));
+            }
+            return lista;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

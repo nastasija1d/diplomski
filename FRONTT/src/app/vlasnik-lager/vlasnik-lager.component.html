@@ -1,26 +1,84 @@
-<div class="tabs-container">
-    <div class="tabs">
-      <button  class="tab-button" [class.active]="activeTab === 'kategorija'" (click)="setActiveTab('kategorija')">
-        Kategorija
-      </button>
-      <button
-        class="tab-button" [class.active]="activeTab === 'brend'" (click)="setActiveTab('brend')">
-        Brend
-      </button>
-      <button
-        class="tab-button" [class.active]="activeTab === 'proizvodjac'" (click)="setActiveTab('proizvodjac')">
-        Proizvođač
-      </button>
-    </div>
+<div class="container">
+  <form class="form">
+    <label>
+      <select class="input"  (change)="onVrstaChange($event)" [(ngModel)]="vrsta" [ngModelOptions]="{standalone: true}">
+        <option value=""  selected>Izaberi vrstu</option>
+        @for (o of vrstaOptions; track o) {
+          <option [value]="o">{{o}}</option>
+        }
+      </select>
+      <span>Vrsta</span>
+    </label>
+    <label>
+      <select class="input" [(ngModel)]="podvrsta"  [disabled]="disabled" [ngModelOptions]="{standalone: true}">
+        <option value=""  selected>Izaberi podvrstu</option>
+        @for (o of podvrstaOptions; track o) {
+          <option [value]="o">{{o}}</option>
+        }
+      </select>
+      <span>Podvrsta</span>
+    </label>
+    <label>
+      <select class="input" [(ngModel)]="marka"  [ngModelOptions]="{standalone: true}">
+        <option value=""  selected>Izaberi marku automobila</option>
+        @for (o of markaOptions; track o) {
+          <option [value]="o">{{o}}</option>
+        }
+      </select>
+      <span>Marka automobila</span>
+    </label>
+    <label>
+      <select class="input" [(ngModel)]="proizvodjac"  [ngModelOptions]="{standalone: true}">
+        <option value=""  selected>Izaberi proizvodjaca</option>
+        @for (o of proizvodjacOptions; track o) {
+          <option [value]="o">{{o}}</option>
+        }
+      </select>
+      <span>Proizvodjac</span>
+    </label>
+    <label>
+      <select class="input" [(ngModel)]="sortParametar" (change)="onFilterChange()" [ngModelOptions]="{standalone: true}">
+        <option value="a.naziv" selected>Naziv</option>
+        <option value="a.cena_p">Cena</option>
+        <option value="v.naziv">Vrsta</option>
+        <option value="pv.naziv">Podvrsta</option>
+        <option value="m.naziv">Marka</option>
+        <option value="pr.naziv">Proizvodjac</option>
+      </select>
+      <span>Sortiraj</span>
+    </label>
+  </form>
 
-    <div *ngIf="activeTab === 'kategorija'" class="tab-content">
-      <p style="color: white;">Ovde se prikazuje sadržaj za <strong>Kategoriju</strong>.</p>
-    </div>
-    <div *ngIf="activeTab === 'brend'" class="tab-content">
-      <p style="color: white;">Ovde se prikazuje sadržaj za <strong>Brend</strong>.</p>
-      <app-vlager-brend></app-vlager-brend>
-    </div>
-    <div *ngIf="activeTab === 'proizvodjac'" class="tab-content">
-      <p style="color: white;">Ovde se prikazuje sadržaj za <strong>Proizvođača</strong>.</p>
-    </div>
+  <button class="submit" (click)="load()" >Prikaži</button>
+
+  <div style="padding: 30px; width: 100%;">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Naziv</th><th>Vrsta</th><th>Podvrsta</th>
+          <th>Marka</th><th>Proizvođač</th>
+          <th>Prodajna cena</th><th>Nabavna cena</th><th>Na stanju</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let artikal of artikli">
+          <td>{{ artikal.id }}</td>
+          <td>{{ artikal.naziv }}</td>
+          <td>{{ artikal.vrsta }}</td>
+          <td>{{ artikal.podVrsta }}</td>
+          <td>{{ artikal.marka }}</td>
+          <td>{{ artikal.proizvodjac }}</td>
+          <td>{{ artikal.cena_prodajna }}</td>
+          <td>{{ artikal.cena_nabavna}}</td>
+          <td>{{ artikal.kolicina }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 0" class="nav-button">← Prev</button>
+    <span class="page-number">Page {{ currentPage + 1 }}</span>
+    <button (click)="nextPage()"  class="nav-button">Next →</button>
+  </div>
+</div>

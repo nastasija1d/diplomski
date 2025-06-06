@@ -1,0 +1,14 @@
+<div class="search-wrapper">
+  <div class="search-box">
+    <input type="text" [(ngModel)]="query" placeholder="Pretraga..." (keydown.enter)="search()" />
+    <button (click)="search()">
+      <img src="search.png" alt="search" />
+    </button>
+  </div>
+
+  <div class="search-overlay" *ngIf="showResults">
+    <div class="results-box">
+      <app-search-card *ngFor="let item of results" [item]="item"></app-search-card>
+    </div>
+  </div>
+</div>

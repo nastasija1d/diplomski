@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.db.dao.VlasnikRepo;
 import com.example.backend.models.Artikal;
-import com.example.backend.models.Porudzbina;
 import com.example.backend.models.PorudzbinaInfo;
 import com.example.backend.models.Proizvodjac;
 
@@ -45,6 +44,19 @@ public class VlasnikController {
     public List<Artikal> getArtikle(@RequestParam String datumOD, @RequestParam String datumDO) {
         return new VlasnikRepo().getArtikle(datumOD, datumDO);
     }
+
+    @GetMapping("lager")
+    public List<Artikal> filtrirajArtikle(
+            @RequestParam(required = false) String vrsta,
+            @RequestParam(required = false) String podvrsta,
+            @RequestParam(required = false) String marka,
+            @RequestParam(required = false) String proizvodjac,
+            @RequestParam(defaultValue = "a.idArtikl") String sortBy,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "100") Integer size) {
+        return new VlasnikRepo().filtrirajArtikle(vrsta, podvrsta, proizvodjac, marka, sortBy, page, size);
+    }
+
     
     
 }

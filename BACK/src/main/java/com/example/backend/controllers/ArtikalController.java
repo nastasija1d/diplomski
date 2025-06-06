@@ -48,14 +48,19 @@ public class ArtikalController {
         return new ArtikalRepo().filtrirajArtikle(naziv, proizvodjac, marka, minKolicina, minCena, maxCena);
     }
 
-    @GetMapping("pretraga")
-    public List<Artikal> pretraga(String str) {
-        return null;
+    @GetMapping("/search")
+    public List<Artikal> pretraga(@RequestParam String query) {
+        return new ArtikalRepo().pretraga(query);
     }
 
     @PostMapping("/dodaj")
     public int dodajNoviArtikal(@RequestBody Artikal entity) {
         return new ArtikalRepo().dodajArtikal(entity);
+    }
+
+    @GetMapping("/najprodavaniji")
+    public List<Artikal> najprodavaniji() {
+        return new ArtikalRepo().najprodavaniji();
     }
 
 }
