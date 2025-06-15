@@ -1,31 +1,26 @@
-<section class="best-sellers-section">
-  <h2 class="section-title">Najprodavaniji proizvodi</h2>
+<div class="container">
+  <h2 class="title">Najprodavaniji proizvodi</h2>
+  <div class="slider-wrapper">
+    <button class="nav left" (click)="scroll(-1)">‹</button>
 
-  <div class="carousel-wrapper">
-    <button class="carousel-btn prev" (click)="scrollLeft()">‹</button>
-
-    <!-- ovo je container koji scrolluje -->
-    <div class="product-carousel" #carousel>
-      <div
-        class="product-card reveal"
-        *ngFor="let product of bestSellers; let i = index"
-        #cardRef
-      >
-        <div class="product-image-wrapper">
-          <img [src]="'http://localhost:8080/slika/podgrupa/' + product.podVrsta.replace(' ', '_')" 
-               [alt]="product.naziv" />
+    <div class="cards" #cardContainer>
+      <div class="card fade-in" *ngFor="let p of bestSellers">
+        <div class="image-wrapper">
+          <img [src]="'http://localhost:8080/slika/podgrupa/' + formatPodVrsta(p.podVrsta)"
+               [alt]="p.naziv" />
+          <div class="image-overlay"></div>
         </div>
-        <div class="product-details">
-          <h3>{{ product.naziv }}</h3>
-          <p><strong>Grupa:</strong> {{ product.vrsta }}</p>
-          <p><strong>Podgrupa:</strong> {{ product.podVrsta }}</p>
-          <p><strong>Brend:</strong> {{ product.marka }}</p>
-          <p><strong>Proizvođač:</strong> {{ product.proizvodjac }}</p>
+        <div class="info">
+          <h3 title="{{ p.naziv }}"><a [routerLink]="['/artikal', p.id]" class="text-title">{{p.naziv}}</a></h3>
+          <p>{{ p.vrsta }} / {{ p.podVrsta }}</p>
+          <p>{{ p.marka }} – {{ p.proizvodjac }}</p>
         </div>
       </div>
     </div>
 
-    <button class="carousel-btn next" (click)="scrollRight()">›</button>
+    <button class="nav right" (click)="scroll(1)">›</button>
   </div>
-</section>
+</div>
+
+
 

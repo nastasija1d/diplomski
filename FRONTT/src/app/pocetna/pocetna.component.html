@@ -1,5 +1,7 @@
-<div style="padding: 0;">
+<div style="padding: 0px;margin: 0px;">
   <app-carousel></app-carousel>
+
+  <app-najprodavaniji></app-najprodavaniji>
 
   <div class="brand-wrapper">
     <div class="brand-header">
@@ -11,7 +13,9 @@
     </div>
     <div class="brand-section">
       <div class="brand-card" *ngFor="let brand of brands; let i = index" #cardRef [style.--delay]="i * 0.2 + 's'" >
-        <img [src]="brand.logo" alt="{{ brand.name }} logo" class="brand-image" />
+        <div class="brand-image-wrapper">
+          <img [src]="brand.logo" alt="{{ brand.name }} logo" class="brand-image" />
+        </div>
         <div class="brand-content">
           <h3>{{ brand.name }}</h3>
           <p>{{ brand.description }}</p>
@@ -19,16 +23,16 @@
       </div>
     </div>
   </div>
-  <app-najprodavaniji></app-najprodavaniji>
-  <div class="container mt-4">
+  
+  <!-- <div class="container mt-4">
     <div class="row g-3">
       <div *ngFor="let g of grupe"
         class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
         <app-grupa-card [grupa]="g"></app-grupa-card>
       </div>
     </div>
-  </div>
-
-  <app-uputstvo></app-uputstvo>
+  </div> -->
   <app-kontakt></app-kontakt>
+  <app-saveti></app-saveti>
+  <app-uputstvo></app-uputstvo>
 </div>

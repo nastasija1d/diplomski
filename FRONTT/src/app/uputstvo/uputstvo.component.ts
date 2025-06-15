@@ -14,18 +14,21 @@ export class UputstvoComponent implements AfterViewInit {
  ngAfterViewInit(): void {
   const steps: NodeListOf<Element> = this.el.nativeElement.querySelectorAll('.order-step');
 
-  const observer = new IntersectionObserver((entries, obs) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const indexAttr = entry.target.getAttribute('data-index');
-        const delay = indexAttr ? parseInt(indexAttr) * 0.3 : 0;
+      const element = entry.target as HTMLElement;
+      const indexAttr = element.getAttribute('data-index');
+      const delay = indexAttr ? parseInt(indexAttr) * 0.3 : 0;
 
-        const element = entry.target as HTMLElement;
+      if (entry.isIntersecting) {
         element.style.transition = `opacity 0.6s ${delay}s ease-out, transform 0.6s ${delay}s ease-out`;
         element.style.opacity = '1';
         element.style.transform = 'translateY(0)';
-
-        obs.unobserve(entry.target);
+      } else {
+        // Resetuje stilove kad izađe iz viewporta
+        element.style.transition = 'none';
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(40px)';
       }
     });
   }, {
@@ -34,5 +37,6 @@ export class UputstvoComponent implements AfterViewInit {
 
   steps.forEach(step => observer.observe(step));
 }
+
 
 }

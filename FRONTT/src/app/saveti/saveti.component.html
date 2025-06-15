@@ -1,0 +1,11 @@
+<section class="tips-section">
+  <h2 class="section-title">Servisni saveti i vodiči</h2>
+  <div class="tips-grid">
+    <div class="tip-card" *ngFor="let savet of saveti; let i = index" #card>
+      <div class="icon">{{ savet.ikona }}</div>
+      <h3 class="tip-title">{{ savet.naslov }}</h3>
+      <p class="tip-description">{{ savet.opis }}</p>
+      <a class="tip-link" href="#">Saznaj više →</a>
+    </div>
+  </div>
+</section>

@@ -2,15 +2,16 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, inject, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Artikal } from '../1models/artikal';
 import { ArtikalService } from '../1services/artikal.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-najprodavaniji',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './najprodavaniji.component.html',
   styleUrl: './najprodavaniji.component.css'
 })
-export class NajprodavanijiComponent implements AfterViewInit, OnInit {
+export class NajprodavanijiComponent implements  OnInit {
 
   ngOnInit(): void {
     this.servis.getBestSellers().subscribe((data) => {
@@ -22,36 +23,17 @@ export class NajprodavanijiComponent implements AfterViewInit, OnInit {
   bestSellers : Artikal[] = []
   servis = inject(ArtikalService);
 
-  @ViewChild('carousel', { static: true }) carousel!: ElementRef<HTMLElement>;
-  @ViewChildren('cardRef') cards!: QueryList<ElementRef<HTMLElement>>;
+ @ViewChild('cardContainer', { static: false }) cardContainer!: ElementRef;
 
-  ngAfterViewInit(): void {
-    // intersection observer za animaciju prikazivanja
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const el = entry.target as HTMLElement;
-          if (entry.isIntersecting) {
-            el.classList.add('active');
-          } else {
-            el.classList.remove('active');
-          }
-        });
-      },
-      {threshold: 0.3} );
-
-    // posmatramo svaku karticu
-    this.cards.forEach((card) => {
-      observer.observe(card.nativeElement);
-    });
+  scroll(direction: number) {
+    const container = this.cardContainer.nativeElement;
+    const scrollAmount = 250;
+    container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
   }
 
-    scrollLeft(): void {
-      this.carousel.nativeElement.scrollBy({ left: -320, behavior: 'smooth' });
-    }
-
-    scrollRight(): void {
-      this.carousel.nativeElement.scrollBy({ left: 320, behavior: 'smooth' });
-    }
+  formatPodVrsta(podVrsta: string): string {
+  return podVrsta.trim().split(' ').join('_');
+  // ili: return podVrsta.replace(/\s+/g, '_'); // za više razmaka
+}
 
 }

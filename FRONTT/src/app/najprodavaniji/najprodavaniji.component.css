@@ -1,167 +1,163 @@
-/* Glavna sekcija */
-.best-sellers-section {
-  background: #1a1a1a;
+.container {
+  background: #1a1a1add;
+  padding: 3rem 2rem;
   color: #fff;
-  padding: 60px 20px;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  border-radius: 20px;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
-/* Naslov sekcije */
-.section-title {
-  font-size: 2.6rem;
+.title {
+  font-size: 2.2rem;
   color: #00bfff;
-  margin-bottom: 40px;
-  text-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
-  animation: fadeInDown 0.8s ease;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+  letter-spacing: 1px;
 }
 
-/* Wrapper za carousel i dugmadi */
-.carousel-wrapper {
+.slider-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   overflow: hidden;
-}
 
-/* Sam “rolujući” container */
-.product-carousel {
-  display: flex;
-  gap: 24px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 10px 0;
-}
+  .cards {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: #00bfff #1a1a1a;
 
-/* Kartica proizvoda */
-.product-card {
-  min-width: 280px;
-  max-width: 300px;
-  background: rgba(51, 51, 51, 0.8);
-  backdrop-filter: blur(6px);
-  border-radius: 20px;
-  padding: 20px;
-  flex-shrink: 0;
-  box-shadow: 0 12px 24px rgba(0, 191, 255, 0.1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s;
-}
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
 
-/* Početno stanje kartice (nevidljivo) */
-.product-card.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-}
+    &::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
 
-/* Kad je u viewportu—prikazuj je */
-.product-card.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
+    &::-webkit-scrollbar-thumb {
+      background-color: #00bfff;
+      border-radius: 4px;
+    }
+  }
 
-/* Hover stanje kartice */
-.product-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  background: #333;
-  box-shadow: 0 20px 40px rgba(0, 191, 255, 0.2);
-}
+  .card {
+    width: 280px;
+    min-width: 260px;
+    background: rgba(51, 51, 51, 0.8);
+    border-radius: 20px;
+    padding: 1rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 30px rgba(0, 191, 255, 0.1);
+    color: #fff;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInUp 0.5s ease both;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 15px;
 
-/* Wrapper za sliku - bela pozadina */
-.product-image-wrapper {
-  background: #fff;
-  padding: 10px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 14px 40px rgba(0, 191, 255, 0.25);
+    }
 
-.product-image-wrapper img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transition: transform 0.4s ease;
-}
+    .image-wrapper {
+      width: 100%;
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      background: #fff;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 
-.product-card:hover img {
-  transform: scale(1.05);
-}
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        z-index: 1;
+        position: relative;
+      }
 
-/* Detalji ispod slike */
-.product-details h3 {
-  font-size: 1.3rem;
-  color: #00bfff;
-  margin-bottom: 8px;
-}
+      .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(26, 26, 26, 0.05), rgba(26, 26, 26, 0.35));
+        z-index: 2;
+      }
+    }
 
-.product-details p {
-  font-size: 0.95rem;
-  color: #ccc;
-  margin: 3px 0;
-}
+    .info {
+      text-align: center;
 
-/* Prev/Next dugmići */
-.carousel-btn {
+      h3 {
+        font-size: 1.05rem;
+        margin-bottom: 0.4rem;
+        color: #00bfff;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #ccc;
+      }
+    }
+  }
+
+  .nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 191, 255, 0.1);
-  border: 2px solid #00bfff;
+  background: transparent;
+  border: none;
   color: #00bfff;
-  font-size: 2.4rem;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  font-size: 6.4rem;
   cursor: pointer;
-  z-index: 2;
-  transition: all 0.3s ease;
-}
+  z-index: 10;
+  padding: 0 8px;
+  transition: color 0.3s ease, transform 0.3s ease;
 
-.carousel-btn:hover {
-  background: #00bfff;
-  color: #1a1a1a;
-}
-
-.carousel-btn.prev {
-  left: 10px;
-}
-
-.carousel-btn.next {
-  right: 10px;
-}
-
-/* Animacija za naslov */
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px);
+  &.left {
+    left: -5px;
   }
-  100% {
+
+  &.right {
+    right: -5px;
+  }
+
+  &:hover {
+    color: #ffffff;
+    transform: translateY(-50%) scale(1.2);
+    text-shadow: 0 0 8px rgba(0, 191, 255, 0.6);
+  }
+}
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* Animacija
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Sakrivanje horizontalnog scrollbar-a (opciono) */
-.product-carousel::-webkit-scrollbar {
-  display: none;
-}
-.product-carousel {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Responsive podešavanje */
-@media (max-width: 800px) {
-  .carousel-btn {
-    display: none;
-  }
-
-  .product-card {
-    min-width: 240px;
-    max-width: 260px;
-  }
-}
+} */

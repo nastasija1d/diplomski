@@ -6,11 +6,12 @@ import { CarouselComponent } from "../carousel/carousel.component";
 import { UputstvoComponent } from "../uputstvo/uputstvo.component";
 import { KontaktComponent } from "../kontakt/kontakt.component";
 import { NajprodavanijiComponent } from "../najprodavaniji/najprodavaniji.component";
+import { SavetiComponent } from "../saveti/saveti.component";
 
 @Component({
   selector: 'app-pocetna',
   standalone: true,
-  imports: [GrupaCardComponent, CommonModule, CarouselComponent, UputstvoComponent, KontaktComponent, NajprodavanijiComponent],
+  imports: [GrupaCardComponent, CommonModule, CarouselComponent, UputstvoComponent, KontaktComponent, NajprodavanijiComponent, SavetiComponent],
   templateUrl: './pocetna.component.html',
   styleUrl: './pocetna.component.css',
 })
