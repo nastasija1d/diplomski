@@ -1,1 +1,15 @@
-<p>grupe-stranica works!</p>
+<section class="modern-card-section">
+  <div class="sticky-heading">
+    <h2>Kompletna ponuda delova</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="modern-card" *ngFor="let item of items;" #card>
+      <div class="card-image-wrapper">
+        <img [src]="'http://localhost:8080/slika/grupa/' + formatPodVrsta(item)" [alt]="item" />
+        <button class="btn-view-products" (click)="klik(item)">Pogledaj proizvode</button>
+      </div>
+      <h3 class="card-title">{{ item }}</h3>
+    </div>
+  </div>
+</section>

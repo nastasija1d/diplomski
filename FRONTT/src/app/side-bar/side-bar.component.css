@@ -1,0 +1,185 @@
+/* Sidebar wrapper */
+.sidebar {
+  position: fixed;
+  top: 10px;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: rgba(51, 51, 51, 0.95); /* #333 sa prozirnošću */
+  z-index: 1000;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Scrollbar za tamnu temu */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background-color: #2a2a2a;
+}
+
+/* Glavni kontejner unutar sidebara */
+.sidebar-content {
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Osnovne stavke menija */
+.sidebar-item {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+}
+
+.sidebar-item:hover {
+  background-color: #2a2a2a;
+}
+
+/* PROIZVODI toggle stil */
+.proizvodi-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.proizvodi-toggle.active {
+  color: #00bfff;
+}
+
+/* Grupa proizvoda */
+.product-groups-section {
+  margin-top: 8px;
+}
+
+/* Kartica grupe */
+.sidebar-group {
+  margin-top: 4px;
+}
+.sidebar-group.active .group-name {
+  color: #00bfff;
+}
+
+/* Header grupe */
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.group-header:hover {
+  background-color: #2f2f2f;
+}
+
+/* Ime grupe */
+.group-name {
+  color: white;
+  font-size: 14px;
+}
+
+/* Dugme (strelica) pored grupe */
+.toggle-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  font-size: 16px;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+.arrow-down {
+  transform: rotate(0deg);
+}
+.arrow-right {
+  transform: rotate(-90deg);
+}
+
+/* Lista podgrupa */
+.subgroup-list {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 8px;
+}
+
+/* Podgrupa kartica sa slikom */
+.sidebar-subitem-with-image {
+  display: flex;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  overflow: hidden;
+}
+
+.sidebar-subitem-with-image:hover {
+  background-color: #2a2a2a;
+}
+
+/* Slika podgrupe */
+.subitem-image-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-right: 10px;
+  background: linear-gradient(to right, white 60%, rgba(26, 26, 26, 0.9));
+}
+.subitem-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Tekst uz sliku */
+.subitem-text {
+  color: #eee;
+  font-size: 15px;
+  flex-grow: 1;
+}
+
+/* Animacija za prikaz */
+.animate {
+  animation: fadeSlideIn 0.3s ease-out;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive: na malim ekranima zauzima celu širinu */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    max-height: 100%;
+  }
+}

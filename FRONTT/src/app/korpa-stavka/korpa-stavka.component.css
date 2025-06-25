@@ -1,138 +1,189 @@
-/* korpa-stavka.component.css */
 .cart-item-card {
   display: flex;
-  position: relative;
-  gap: 1rem;
+  background: #ffffff10; /* providno belo siva podloga */
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
   padding: 1.5rem;
-  margin-bottom: 1rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+  color: white;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+  position: relative;
 }
 
-img{
-  width: 100px;
-  height: 100px;
+.cart-item-card:hover {
+  transform: scale(1.5);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+  animation: pulse 1s infinite alternate ease-in-out;
 }
 
-.item-image .image-placeholder {
-  width: 10px;
-  height: 10px;
-  background: #f0f0f0;
-  border-radius: 4px;
-  margin-left: 30px;
+/* SLIKA */
+.item-image {
+  flex: 0 0 130px;
+  margin-right: 1.5rem;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: white; /* da se uklopi sa slikom */
+  padding: 5px;
 }
 
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.cart-item-card:hover .item-image img {
+  transform: scale(1.1);
+}
+
+/* SADRŽAJ */
 .item-content {
-  flex-grow: 1;
-  margin-left: 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: 1rem;
-  margin-left: 30px;
 }
 
 .item-title {
-  margin: 0;
   font-size: 1.5rem;
-  color: #333;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
-.remove-button {
-  background: none;
-  border: none;
-  color: #1976d2;
-  cursor: pointer;
-  padding: 0.25rem;
+.item-title:hover {
+  color: #00bfff;
+  text-shadow: 0 0 5px #00bfff;
 }
 
-.item-details-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  align-items: start;
+/* TABELA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  font-size: 1rem;
 }
 
+th, td {
+  text-align: center;
+  padding: 0.5rem;
+}
 
-.price {
-  color: #1976d2;
+th {
+  font-weight: 600;
+  color: #00bfff;
+}
+
+/* CENA I UKUPNO */
+.price, .total-price {
   font-weight: bold;
+  font-size: 1.1rem;
 }
 
-.total-price {
-  color: #1976d2;
-  font-weight: bold;
-}
-
+/* KOLIČINA */
 .quantity-control {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 
 .quantity-btn {
-  width: 28px;
-  height: 28px;
-  border: 1px solid #1976d2;
-  border-radius: 50%;
-  background: white;
-  color: #1976d2;
+  background: none;
+  border: 2px solid #00bfff;
+  color: #00bfff;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .quantity-btn:hover {
-  background: #1976d2;
+  background-color: #00bfff;
   color: white;
 }
 
 .quantity {
-  min-width: 30px;
-  text-align: center;
-  color: #1976d2;
-  font-weight: bold;
+  font-size: 1.1rem;
+  min-width: 24px;
+  display: inline-block;
 }
 
-td{
-  padding-left: 20px;
-  padding-right: 20px;
-}
-th{
-  font-weight: 300;
-}
-
+/* TOAST */
 .cart-toast {
   position: absolute;
   top: 50px;
-  left: 50%;
-  background-color: rgba(0, 0, 0, 0.8);
+  right: 10px;
+  background: #00bfffc1;
   color: white;
-  padding: 12px 18px;
+  padding: 8px 14px;
   border-radius: 8px;
-  font-size: 14px;
-  z-index: 10;
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
+  font-size: 0.9rem;
+  animation: fadeSlide 2s ease forwards;
 }
 
-/* Opcionalna animacija za skrivanje */
-.cart-toast.hide {
-  opacity: 0;
+/* ANIMACIJE */
+@keyframes fadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 
-a {
-  text-decoration: none; /* Uklanja podvlačenje */
-  color: #007bff; /* Plava boja za linkove */
-  transition: color 0.3s ease; /* Efekat prelaza boje */
+@keyframes pulse {
+  0% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1.055);
+  }
 }
 
-a:hover {
-  color: #0056b3; /* Tamnija plava boja pri hover-u */
+.cart-item-card {
+  position: relative;
+}
+
+/* Logo brenda u gornjem desnom uglu */
+.cart-item-card {
+  position: relative;
+}
+
+/* Logo brenda u gornjem desnom uglu – bez pozadine */
+.brand-logo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  z-index: 5;
+}
+
+/* Hover efekat: suptilan zoom i svetliji prikaz */
+.cart-item-card:hover .brand-logo {
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }

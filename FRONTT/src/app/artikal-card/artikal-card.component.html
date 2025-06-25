@@ -1,16 +1,17 @@
 <div class="card">
   <!-- Header sa naslovom -->
-  <div class="card-header">
+  <div class="card-h">
     <h3>
       <a [routerLink]="['/artikal', artikal.id]" class="text-title">{{artikal.naziv}}</a>
     </h3>
+    <img class="brand-logo" [src]="'http://localhost:8080/slika/marka/' + artikal.marka" alt="{{artikal.marka}}">
   </div>
 
   <!-- Glavni deo sa informacijama -->
-  <div class="card-info">
-    <p class="text-body"><b>Kategorija:</b> {{artikal.podVrsta}}</p>
-    <p class="text-body"><b>Proizvodjac:</b> {{artikal.proizvodjac}}</p>
-    <p class="text-body"><b>Marka:</b> {{artikal.marka}}</p>
+  <div class="card-info" style="color: white;">
+    <p class="text-b"><b>Kategorija:</b> {{artikal.podVrsta}}</p>
+    <p class="text-b"><b>Proizvodjac:</b> {{artikal.proizvodjac}}</p>
+    <p class="text-b"><b>Marka:</b> {{artikal.marka}}</p>
   </div>
 
   <!-- Footer sa cenom i dugmetom -->

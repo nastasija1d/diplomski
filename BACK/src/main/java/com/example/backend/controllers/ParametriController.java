@@ -38,6 +38,12 @@ public class ParametriController {
         return new ArtikalRepo().getAllPodVrste(naziv);
     }
 
+    @GetMapping("vrsta/opis/{id}")
+    public String getOpisVrste(@PathVariable String id) {
+        String naziv = id.replace("_", " ");
+        return new ArtikalRepo().getOpis(naziv);
+    }
+
     @GetMapping("proizvodjac/{id}")
     public List<Proizvodjac> getProizvodjaciOfPodgrupa(@PathVariable String id) {
         String naziv = id.replace("_", " ");

@@ -39,12 +39,18 @@
 
   <button (click)="filtriraj()" class="submit">Filtriraj</button>
 </div>
-<div class="container mt-4" *ngIf="!isLoading && !isEmpty">
-  <div class="row g-3">
-    <div *ngFor="let artikal of artikli"
-      class="col-12 col-sm-12 col-md-6 col-lg-4 d-flex align-items-stretch">
+<div class="container mt-4" *ngIf="!isLoading && !isEmpty" style="display: flex; justify-content: center;">
+  <div class="row mx-0">
+    <div *ngFor="let artikal of artikli; let i = index"
+     #card
+     class="col-12 col-sm-12 col-md-6 col-lg-4 d-flex  card-fade"
+     [class.visible]="visibleCards.has(i)"
+     [attr.data-index]="i"
+     [style.--i]="i"
+     style="text-align: center; justify-content: center;">
       <app-artikal-card [artikal]="artikal"></app-artikal-card>
     </div>
+
   </div>
 </div>
 <div *ngIf="isLoading" class="klipovi-container">

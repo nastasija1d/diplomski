@@ -17,12 +17,16 @@ export class PodgrupeComponent implements OnInit {
   podgrupe: string[] = [];
   grupa = '';
   naziv = '';
-
+  opis : string = '';
   ngOnInit(): void {
     this.grupa = this.ruta.snapshot.paramMap.get('grupa');
     this.naziv = this.grupa.replaceAll('_', ' ');
     this.artiklServis.getAllPodgrupe(this.grupa).subscribe((data) => {
       this.podgrupe = data;
+
     });
+    this.artiklServis.getOpis(this.grupa).subscribe((opis) => {
+        this.opis = opis;
+      });
   }
 }

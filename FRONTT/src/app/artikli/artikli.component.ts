@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, inject, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ArtikalCardComponent } from '../artikal-card/artikal-card.component';
 import { CommonModule } from '@angular/common';
 import { Artikal } from '../1models/artikal';
@@ -21,7 +21,7 @@ import { DoubleSliderComponent } from '../double-slider/double-slider.component'
   templateUrl: './artikli.component.html',
   styleUrl: './artikli.component.css',
 })
-export class ArtikliComponent implements OnInit {
+export class ArtikliComponent implements OnInit, AfterViewInit {
   artikalService = inject(ArtikalService);
   parametriService = inject(ParametriService);
   ruta = inject(ActivatedRoute);
@@ -161,4 +161,33 @@ export class ArtikliComponent implements OnInit {
         });
     }, 1000); // 2 sekunde
   }
+
+  @ViewChildren('card', { read: ElementRef }) cards: QueryList<ElementRef>;
+visibleCards: Set<number> = new Set();
+
+@HostListener('window:scroll', [])
+onWindowScroll() {
+  this.checkVisibleCards();
+}
+
+ngAfterViewInit(): void {
+  setTimeout(() => this.checkVisibleCards(), 500);
+}
+
+checkVisibleCards() {
+  if (!this.cards) return;
+
+  const windowHeight = window.innerHeight;
+
+  this.cards.forEach((cardRef, index) => {
+    const rect = cardRef.nativeElement.getBoundingClientRect();
+
+    // Prikazujemo ako je bar delimično u viewport-u
+    if (rect.top < windowHeight && rect.bottom > 0) {
+      this.visibleCards.add(index);
+    } else {
+      this.visibleCards.delete(index);
+    }
+  });
+}
 }

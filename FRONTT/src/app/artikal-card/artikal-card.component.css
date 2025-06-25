@@ -1,118 +1,135 @@
 /* Osnovni stilovi kartice */
 .card {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
+  color: #ffffff;
   width: 320px;
-  height: 300px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 320px;
+  background: rgba(24, 24, 28, 0.55); /* tamna, poluprovidna */
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 191, 255, 0.25); /* plava senka */
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(18px); /* blur za glassmorphism */
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    background-color 0.4s ease;
 }
 
-/* Hover efekat na kartici */
+/* Hover efekat */
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  background: rgba(36, 36, 42, 0.7);
+  box-shadow: 0 16px 45px rgba(0, 191, 255, 0.567); /* jača plava senka */
 }
 
-/* Header – veći prostor za naslov, plava pozadina i beli tekst */
-.card-header {
-  background: #00bfff;
+/* Header sa plavom pozadinom */
+.card-h {
+  background: linear-gradient(to right, #00bfff, #009acd);
   height: 90px;
   padding: 16px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   text-align: center;
+  box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.card-header h3 {
-  text-align: center;
+.card-h h3 {
   margin: 0;
   color: white;
-  font-size: 1.5em; /* Veći naslov */
-  font-weight: 700;
+  font-size: 1.3em;
+  font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
 /* Glavni deo sa informacijama */
 .card-info {
   flex-grow: 1;
   padding: 16px;
-  text-align: left;
-  background: white;
-  color: #333;
+  background: transparent;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Footer – uvek na dnu */
+/* Footer */
 .card-footer {
   padding: 12px 16px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: transparent;
 }
 
-/* Stilovi za tekst naslova i ostalih elemenata */
+/* Stilovi za tekst */
 .text-title {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.2em;
+  color: #f0f0f0;
 }
 
-/* Cena je sada boldovana */
 .card-footer .text-title:first-child {
-  font-weight: 700;
+  font-weight: 800;
+  color: #00bfff;
 }
 
-/* Stilovi za tekst tela */
-.text-body {
-  font-size: 1.1em;
+.text-b {
+  font-size: 1.05em;
   margin: 8px 0;
   text-align: left;
   font-weight: 400;
+  color: rgb(255, 255, 255);
+  z-index: 10;
 }
 
-/* Dugme – moderno stilizovano dugme sa interaktivnim efektima */
+/* Dugme za dodavanje u korpu */
 .card-button {
   border: none;
-  background: linear-gradient(145deg, #00bfff, #009acd);
+  background: linear-gradient(145deg, #00bfff, #007ba7);
   color: white;
   padding: 10px 14px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 1em;
   font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3);
 }
 
-/* Kada je artikal na stanju */
+/* Hover efekat za dugme */
 .card-button.hover-true:hover {
   background: linear-gradient(145deg, #009acd, #00bfff);
   transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 191, 255, 0.5);
 }
 
-/* Kada artikal nije na stanju – dugme se stilizuje u crvenoj nijansi */
+/* Kada artikal nije na stanju */
 .card-button.hover-false {
-  background: linear-gradient(145deg, #ff4d4d, #e60000);
+  background: linear-gradient(145deg, #b00020, #8c001a);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
 }
 
 .card-button.hover-false:hover {
-  background: linear-gradient(145deg, #e60000, #ff4d4d);
+  background: linear-gradient(145deg, #8c001a, #b00020);
   transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(255, 0, 0, 0.5);
 }
-
 
 /* SVG ikonica unutar dugmeta */
 .svg-icon {
   width: 20px;
   height: 20px;
+  fill: white;
 }
 
 /* Toast notifikacija */
@@ -121,11 +138,11 @@
   top: 70%;
   left: 70%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   color: white;
   padding: 12px 18px;
   border-radius: 8px;
-  font-size: 10px;
+  font-size: 12px;
   z-index: 10;
   pointer-events: none;
   opacity: 1;
@@ -136,7 +153,30 @@
   opacity: 0;
 }
 
+/* Linkovi unutar kartice */
 a {
-  text-decoration: none; /* Uklanja podvučenu liniju */
-  outline: none; /* Uklanja fokus okvir */
+  text-decoration: none;
+  outline: none;
+  color: #ffffff;
 }
+
+a:hover {
+  color: #ffffff;
+}
+
+.brand-logo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .brand-logo {
+  transform: scale(1.1);
+  opacity: 1;
+}
+

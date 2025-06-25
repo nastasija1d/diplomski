@@ -1,141 +1,182 @@
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
 .artikl-container {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
 }
 
 .artikl-naslov {
   text-align: center;
-  color: #007bff;
-  font-size: 30px;
-  margin-top: 20px;
+  color: white;
+  font-size: 36px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 
 .artikl-details {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
+  gap: 30px;
 }
 
 .artikl-slika-container {
   flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* PNG logo marke (u gornjem desnom uglu slike) */
+.brand-logo-wrapper {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+  z-index: 2;
+}
+
+.brand-logo {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Zoom efekt slike */
+.zoom-wrapper {
+  overflow: hidden;
+  border-radius: 16px;
+  max-width: 450px;
+  width: 100%;
 }
 
 .artikl-slika {
   width: 100%;
-  max-width: 450px;
-  border-radius: 10px;
+  height: auto;
+  transition: transform 0.4s ease;
   object-fit: cover;
+  display: block;
+}
+
+.zoom-wrapper:hover .artikl-slika {
+  transform: scale(1.08);
 }
 
 .artikl-info {
-  margin: 50px;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   font-size: 20px;
-  align-items: flex-start; /* Poravnavanje uz levu ivicu */
+  gap: 10px;
+  text-align: left;
+  font-weight: 200;
 }
 
 .artikl-info p {
-  margin: 7px 0;
-  text-align: left; /* Dodato da bi tekst bio poravnat levo */
-}
-
-.dugme-korpa {
-  background: #007bff;
+  margin: 5px 0;
+  line-height: 1.6;
   color: white;
-  padding: 8px 15px; /* Manje dugme (manje padding-a) */
-  border: none;
-  border-radius: 8px;
-  font-size: 14px; /* Manji font */
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-  margin-top: 20px;
-  width: auto; /* Dugme neće biti 100% širine */
 }
 
-.dugme-korpa:hover {
-  background: #0056b3;
+.artikl-info a {
+  color: white;
+  text-decoration: none;
+  font-weight: 200;
+  transition: color 0.3s ease;
 }
+
+.artikl-info a:hover {
+  color: #00bfff;
+  text-shadow: 0 0 6px rgba(0, 191, 255, 0.4);
+}
+
 
 
 .cena {
-  font-size: 18px;
-  color: #004080;
+  font-size: 22px;
+  color: #00bfff;
   font-weight: bold;
+  margin-top: 15px;
 }
 
-
-
-/* Dugme – moderno stilizovano dugme sa interaktivnim efektima */
 .card-button {
+  margin-top: 20px;
   border: none;
   background: linear-gradient(145deg, #00bfff, #009acd);
   color: white;
-  padding: 10px 14px;
-  border-radius: 8px;
+  padding: 14px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 6px;
-  font-size: 1em;
-  font-weight: 600;
+  height: 48px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+  position: relative;
 }
 
-/* Kada je artikal na stanju */
 .card-button.hover-true:hover {
   background: linear-gradient(145deg, #009acd, #00bfff);
-  transform: scale(1.05);
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 191, 255, 0.5);
 }
 
-/* Kada artikal nije na stanju – dugme se stilizuje u crvenoj nijansi */
 .card-button.hover-false {
   background: linear-gradient(145deg, #ff4d4d, #e60000);
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .card-button.hover-false:hover {
-  background: linear-gradient(145deg, #e60000, #ff4d4d);
-  transform: scale(1.05);
+  transform: none;
+  box-shadow: none;
 }
 
-
-/* SVG ikonica unutar dugmeta */
+/* SVG ikonica u centru */
 .svg-icon {
-  width: 80px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+  fill: white;
+  display: block;
+  margin: 0 auto;
 }
 
-/* Toast notifikacija */
 .cart-toast {
-  position: absolute;
-  top:70%;
-  left: 60%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 130px;
+  right: 80px;
+  background-color: #00bfffb0;
   color: white;
-  padding: 12px 18px;
-  border-radius: 8px;
-  font-size: 12px;
-  z-index: 10;
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.4);
+  animation: fadein 0.5s ease-in-out;
 }
 
-.cart-toast.hide {
-  opacity: 0;
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
-a {
-  text-decoration: none; /* Uklanja podvučenu liniju */
-  outline: none; /* Uklanja fokus okvir */
-}
-
-
-

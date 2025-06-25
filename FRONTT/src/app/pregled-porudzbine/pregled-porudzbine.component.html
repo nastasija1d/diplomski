@@ -2,37 +2,45 @@
   <h2>Pregled porudžbine</h2>
 
   <table class="order-table">
-      <thead>
-          <tr>
-              <th>Naziv</th>
-              <th>Količina</th>
-              <th>Cena</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let artikal of artikli">
-              <td>{{ artikal.naziv }}</td>
-              <td>{{ artikal.korpa }}</td>
-              <td>{{ artikal.cena_prodajna }} RSD</td>
-          </tr>
-      </tbody>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Naziv</th>
+        <th>Vrsta</th>
+        <th>Proizvođač</th>
+        <th>Količina</th>
+        <th>Cena</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let artikal of artikli">
+        <td>
+          <img class="brand-logo" [src]="'http://localhost:8080/slika/marka/' + artikal.marka" alt="{{ artikal.marka }}">
+        </td>
+        <td>{{ artikal.naziv }}</td>
+        <td>{{ artikal.podVrsta }}</td>
+        <td>{{ artikal.proizvodjac }}</td>
+        <td>{{ artikal.korpa }}</td>
+        <td>{{ artikal.cena_prodajna }} RSD</td>
+      </tr>
+    </tbody>
   </table>
 
   <div class="total-info">
-    <p><strong>Ukupno:</strong> {{total}} RSD</p>
-    <p><strong>Cena dostave:</strong> {{dostava}} RSD</p>
-    <p style="font-size:small;">*besplatna dostava za porudzbine preko 5000 RSD</p>
+    <p><strong>Ukupno:</strong> {{ total }} RSD</p>
+    <p><strong>Cena dostave:</strong> {{ dostava }} RSD</p>
+    <p class="delivery-note">*Besplatna dostava za porudžbine preko 5000 RSD</p>
     <p class="total-price"><strong>Ukupno sa dostavom:</strong> {{ totaltotal }} RSD</p>
   </div>
 
   <div class="user-info">
-      <h3>Podaci za dostavu</h3>
-      <p><strong>Grad:</strong> </p>
-      <p><strong>Adresa:</strong> </p>
-      <p><strong>Telefon:</strong> </p>
-      <button class="edit-button">
-          <span class="icon">✏️</span> Izmeni
-      </button>
+    <h3>Podaci za dostavu</h3>
+    <p><strong>Grad:</strong> </p>
+    <p><strong>Adresa:</strong> </p>
+    <p><strong>Telefon:</strong> </p>
+    <button class="edit-button">
+      <span class="icon">✏️</span> Izmeni
+    </button>
   </div>
 
   <app-dugme-poruci></app-dugme-poruci>

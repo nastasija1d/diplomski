@@ -66,3 +66,25 @@
 .results-box {
   padding: 12px;
 }
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white; /* po defaultu je bela */
+  transition: color 0.3s ease;
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn:hover {
+  color: #00bfff;
+  transform: scale(1.1);
+}
+
+.search-btn svg {
+  display: block;
+}
+

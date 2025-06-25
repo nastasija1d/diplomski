@@ -369,4 +369,21 @@ System.out.println(ps.toString());
         return null;
     }
 
+    public String getOpis(String id) {
+        try (Connection con = DB.source().getConnection();
+                PreparedStatement ps = con.prepareStatement("SELECT vrsta.opis FROM vrsta \n" + //
+                        "WHERE vrsta.naziv = ?")) {
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            String opis = "";
+            if (rs.next()) {
+                opis = rs.getString(1);
+            }
+            return opis;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

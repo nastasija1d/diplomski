@@ -99,12 +99,12 @@ label span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 400px;
   margin: 20px 0;
 }
 
 .loader-gif {
-  height: 200px;
+  height: 300px;
   width: auto;
 }
 
@@ -113,19 +113,33 @@ label span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 350px;
+  height: 550px;
   margin: 0px 50px;
 }
 
 .klipovi{
-  height: 300px;
+  height: 800px;
 }
 
 .loader-container p {
   margin-top: 0px;
-  font-size: 16px;
+  font-size: 25px;
   color: #00bfff;
   font-weight: bold;
+}
+
+.card-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.card-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-index] {
+  transition-delay: calc(var(--i) * 80ms);
 }
 
 

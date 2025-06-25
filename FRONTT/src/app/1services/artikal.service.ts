@@ -76,4 +76,10 @@ export class ArtikalService {
       params,
     });
   }
+
+  getOpis(grupa: string){
+    return this.http.get<string>(
+      this.urlString + '/parametri/vrsta/opis/' + grupa, {responseType: 'text' as 'json'}
+    );
+  }
 }

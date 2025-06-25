@@ -7,11 +7,12 @@ import { UputstvoComponent } from "../uputstvo/uputstvo.component";
 import { KontaktComponent } from "../kontakt/kontakt.component";
 import { NajprodavanijiComponent } from "../najprodavaniji/najprodavaniji.component";
 import { SavetiComponent } from "../saveti/saveti.component";
+import { GrupeStranicaComponent } from '../grupe-stranica/grupe-stranica.component';
 
 @Component({
   selector: 'app-pocetna',
   standalone: true,
-  imports: [GrupaCardComponent, CommonModule, CarouselComponent, UputstvoComponent, KontaktComponent, NajprodavanijiComponent, SavetiComponent],
+  imports: [CommonModule, CarouselComponent, UputstvoComponent, KontaktComponent, NajprodavanijiComponent, SavetiComponent, GrupeStranicaComponent],
   templateUrl: './pocetna.component.html',
   styleUrl: './pocetna.component.css',
 })
@@ -22,6 +23,7 @@ export class PocetnaComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.artiklServis.getAllGrupe().subscribe((data) => {
       this.grupe = data;
+      console.log('Grupe:', this.grupe);
     });
   }
   brands = [
