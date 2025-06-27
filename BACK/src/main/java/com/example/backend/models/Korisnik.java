@@ -8,9 +8,14 @@ public class Korisnik {
     private String telefon;
     private String adresa;
     private String grad;
+    private int tip; // 1 = kupac, 2 = admin
+
+    public Korisnik() {
+        // Default constructor
+    }
 
     public Korisnik(String ime, String prezime, String email, String lozinka, String telefon, String adresa,
-            String grad) {
+            String grad, int tip) {
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
@@ -18,6 +23,7 @@ public class Korisnik {
         this.telefon = telefon;
         this.adresa = adresa;
         this.grad = grad;
+        this.tip = tip;
     }
 
     public String getIme() {
@@ -74,5 +80,13 @@ public class Korisnik {
 
     public void setGrad(String grad) {
         this.grad = grad;
+    }
+
+    public int getTip() {
+        return this.tip;
+    }
+    
+    public void setTip(int tip) {
+        this.tip = tip;
     }
 }

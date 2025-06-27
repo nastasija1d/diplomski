@@ -203,7 +203,7 @@ public class PorudzbinaRepo {
             PreparedStatement ps = con
                     .prepareStatement("SELECT p.idporudzbina, p.datum, p.iznos, p.idstatus,\n" + //
                             "k.ime, k.prezime, k.email, k.lozinka, k.telefon, k.adresa,\n" + //
-                            "g.naziv\n" + //
+                            "g.naziv, k.tip\n" + //
                             "from porudzbina p inner join korisnik k\n" + //
                             "on k.idKorisnik = p.idKorisnik\n" + //
                             "inner join grad g\n" + //
@@ -219,7 +219,8 @@ public class PorudzbinaRepo {
                         rs.getString(8),
                         rs.getString(9),
                         rs.getString(10),
-                        rs.getString(11));
+                        rs.getString(11),
+                        rs.getInt(12));
                 PorudzbinaInfo porudzbina = new PorudzbinaInfo(
                         rs.getInt(1),
                         korisnik,
@@ -242,7 +243,7 @@ public class PorudzbinaRepo {
             PreparedStatement ps = con
                     .prepareStatement("SELECT p.idporudzbina, p.datum, p.iznos, p.idstatus,\n" + //
                             "k.ime, k.prezime, k.email, k.lozinka, k.telefon, k.adresa,\n" + //
-                            "g.naziv\n" + //
+                            "g.naziv, k.tip\n" + //
                             "from porudzbina p inner join korisnik k\n" + //
                             "on k.idKorisnik = p.idKorisnik\n" + //
                             "inner join grad g\n" + //
@@ -259,7 +260,8 @@ public class PorudzbinaRepo {
                         rs.getString(8),
                         rs.getString(9),
                         rs.getString(10),
-                        rs.getString(11));
+                        rs.getString(11),
+                        rs.getInt(12));
                 PorudzbinaInfo porudzbina = new PorudzbinaInfo(
                         rs.getInt(1),
                         korisnik,

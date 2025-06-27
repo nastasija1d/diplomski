@@ -100,7 +100,7 @@ public class VlasnikRepo {
         try (Connection con = DB.source().getConnection()) {
             PreparedStatement ps = con
                     .prepareStatement("select porudzbina.idporudzbina, porudzbina.datum, porudzbina.iznos, sum(stavka.kolicina), \n" + //       
-                                    "k.ime, k.prezime, k.email, k.lozinka, k.telefon, k.adresa, g.naziv \n" + //
+                                    "k.ime, k.prezime, k.email, k.lozinka, k.telefon, k.adresa, g.naziv, k.tip \n" + //
                                     "from porudzbina inner join stavka on \n" + //
                                     "stavka.idporudzbina = porudzbina.idporudzbina \n" + //
                                     "inner join korisnik k on \n" + //
@@ -122,7 +122,8 @@ public class VlasnikRepo {
                         rs.getString(8),
                         rs.getString(9),
                         rs.getString(10),
-                        rs.getString(11));
+                        rs.getString(11),
+                        rs.getInt(12));
                 PorudzbinaInfo porudzbina = new PorudzbinaInfo(
                         rs.getInt(1),
                         korisnik,
