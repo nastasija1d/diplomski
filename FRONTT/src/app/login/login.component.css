@@ -1,0 +1,131 @@
+/* Container login forme */
+.login-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px 25px;
+  background-color: #1a1a1a;
+  border-radius: 20px;
+  border: 1px solid #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* Naslov */
+.login-container h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #00bfff;
+  text-shadow: 0 0 8px rgba(0, 191, 255, 0.7);
+  transition: text-shadow 0.3s ease;
+}
+
+/* Label wrapper */
+.form-label {
+  position: relative;
+  display: block;
+  margin-bottom: 24px;
+}
+
+/* Input polja */
+.input {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  padding: 12px 10px 8px 10px;
+  border: 1px solid rgba(105, 105, 105, 0.4);
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Sakrivanje placeholder teksta */
+.input::placeholder {
+  color: transparent;
+}
+
+/* Fokus i kada ima vrednost - border plavi i label pomeren */
+.input:focus,
+.input:not(:placeholder-shown) {
+  background-color: #333; /* ostaje tamno */
+  border-color: #00bfff;
+  color: #fff;
+}
+
+/* Label span pozicija i animacija */
+.form-label span {
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  padding: 0 6px;
+}
+
+/* Kada je input fokusiran ili popunjen */
+.input:focus + span,
+.input:not(:placeholder-shown) + span {
+  top: -1px;
+  font-size: 0.75em;
+  color: #00bfff;
+  font-weight: 600;
+}
+
+/* Dugme submit */
+button[type="submit"] {
+  border: none;
+  outline: none;
+  padding: 12px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  background-color: #00bfff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-weight: 400;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #00bfff;
+}
+
+button[type="submit"]:disabled {
+  background-color: #00bfff;
+  cursor: not-allowed;
+}
+
+/* Prikaz greške */
+.error {
+  color: #ff4d4d;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #333 inset !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+a {
+  text-decoration: none;
+  color: #00bfff;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #00bfff;
+}
+
+

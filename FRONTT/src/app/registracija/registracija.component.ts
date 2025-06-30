@@ -41,6 +41,9 @@ export class RegistracijaComponent implements OnInit {
     const lozinka = (
       document.getElementById('lozinka') as HTMLInputElement
     ).value.trim();
+    const potvrda = (
+      document.getElementById('potvrda') as HTMLInputElement
+    ).value.trim();
     const telefon = (
       document.getElementById('telefon') as HTMLInputElement
     ).value.trim();
@@ -55,11 +58,11 @@ export class RegistracijaComponent implements OnInit {
     const telefonRegex = /^[0-9]{9,15}$/; // Telefon mora biti broj (9-15 cifara)
 
     if (!ime || !imePrezimeRegex.test(ime)) {
-      this.errorMessage = 'Ime mora sadržati samo slova';
+      this.errorMessage = 'Ime sme sadržati samo slova';
       return;
     }
     if (!prezime || !imePrezimeRegex.test(prezime)) {
-      this.errorMessage = 'Prezime mora sadržati samo slova';
+      this.errorMessage = 'Prezime sme sadržati samo slova';
       return;
     }
     if (!email || !emailRegex.test(email)) {
@@ -68,6 +71,10 @@ export class RegistracijaComponent implements OnInit {
     }
     if (!lozinka || lozinka.length < 6) {
       this.errorMessage = 'Lozinka mora imati najmanje 6 karaktera';
+      return;
+    }
+    if (lozinka !== potvrda) {
+      this.errorMessage = 'Lozinke se ne poklapaju';
       return;
     }
     if (!telefon || !telefonRegex.test(telefon)) {
@@ -91,11 +98,9 @@ export class RegistracijaComponent implements OnInit {
 
     this.korisnikService.registruj(this.korisnik).subscribe((data) => {
       if (data == 1 || data == 2) {
-        console.log('Korisnik registrovan');
         alert('Korisnik uspesno registrovan!');
       } else {
-        console.log('Korisnik NIJE registrovan');
-        alert('Vec postoji korisnik sa unetom mail adresom!');
+        this.errorMessage = 'Korisnik sa tim email-om već postoji!';
       }
     });
   }

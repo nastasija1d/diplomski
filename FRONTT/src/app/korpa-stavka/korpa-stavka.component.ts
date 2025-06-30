@@ -52,7 +52,7 @@ export class KorpaStavkaComponent implements OnInit {
     }
     this.artikal.korpa++;
     this.total = this.artikal.cena_prodajna * this.artikal.korpa;
-    this.servis.dodajUKorpu(this.artikal.id, 1).subscribe((data) => {
+    this.servis.dodajUKorpu(this.artikal.id).subscribe((data) => {
       if (data == 1) {
         this.refresh.emit();
       }
@@ -63,7 +63,7 @@ export class KorpaStavkaComponent implements OnInit {
     if (this.artikal.korpa > 1) {
       this.artikal.korpa--;
       this.total = this.artikal.cena_prodajna * this.artikal.korpa;
-      this.servis.izbaciJedan(this.artikal.id, 1).subscribe((data) => {
+      this.servis.izbaciJedan(this.artikal.id).subscribe((data) => {
         if (data == 1) {
           this.refresh.emit();
         }

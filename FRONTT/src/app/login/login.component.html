@@ -1,0 +1,37 @@
+<div class="login-container">
+  <h2>Prijava</h2>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+    <label class="form-label">
+      <input
+        class="input"
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+        placeholder=" "
+      />
+      <span>Email</span>
+    </label>
+
+    <label class="form-label">
+      <input
+        class="input"
+        type="password"
+        id="lozinka"
+        name="lozinka"
+        [(ngModel)]="lozinka"
+        required
+        placeholder=" "
+      />
+      <span>Lozinka</span>
+    </label>
+
+    <button type="submit" [disabled]="loginForm.invalid" class="submit">
+      Prijavi se
+    </button>
+
+    <p class="error" *ngIf="error" style="margin-top: 20px;">{{ error }}</p>
+    <p class="signin" style="margin-top: 20px;">Nemaš nalog? <a href="registracija">Registruj se</a></p>
+  </form>
+</div>

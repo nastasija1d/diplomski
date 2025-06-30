@@ -14,7 +14,7 @@ export class DugmePoruciComponent {
   servis = inject(PorudzbinaService);
 
   Poruci() {
-    this.servis.naruci(1).subscribe((data) => {
+    this.servis.naruci().subscribe((data) => {
       if (data >= 1) {
         alert('Porucili ste proizvod');
         this.servis.osveziBrojArtikala();

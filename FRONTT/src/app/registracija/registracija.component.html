@@ -20,7 +20,7 @@
       <span>Lozinka</span>
     </label>
     <label>
-      <input class="input" type="password" placeholder="" required="">
+      <input class="input" id="potvrda" type="password" placeholder="" required="">
       <span>Potvrdi lozinku</span>
     </label>
     <label>
@@ -42,8 +42,8 @@
         <span>Grad</span>
       </label>
     </div>
-    <button class="submit" (click)="registruj()">Potvrdi</button>
+    <button class="submit" type="button" (click)="registruj()">Potvrdi</button>
     <p style="color: red;">{{errorMessage}}</p>
-    <p class="signin">Već imaš nalog? <a href="#">Uloguj se</a></p>
+    <p class="signin">Već imaš nalog? <a href="login">Uloguj se</a></p>
   </form>
 </div>

@@ -1,0 +1,115 @@
+/* Kontejner centriran na stranici */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* Card sa glassmorphism efektom */
+.profile-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  width: 100%;
+  max-width: 400px;
+  color: #f0f0f0;
+  text-align: center;
+}
+
+/* Avatar wrapper */
+.avatar-wrapper {
+  margin-bottom: 20px;
+}
+
+.avatar-icon {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+}
+
+/* Naslov */
+.profile-card h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #00bfff;
+  letter-spacing: 0.5px;
+}
+
+/* Tekstovi */
+.profile-card p {
+  margin: 8px 0;
+  font-size: 16px;
+  text-align: left;
+}
+
+/* Istaknuti labeli */
+.profile-card strong {
+  color: #fff;
+}
+
+/* Error poruka */
+.error-message {
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff4d4d;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+/* Loading tekst */
+.loading-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* Dugmad wrapper */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+/* Osnovni stil dugmeta */
+.btn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Edit dugme */
+.edit-btn {
+  background: linear-gradient(145deg, #00bfff, #009acd);
+  color: #fff;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 191, 255, 0.5);
+  background: linear-gradient(145deg, #009acd, #00bfff);
+}
+
+/* Logout dugme */
+.logout-btn {
+  background: linear-gradient(145deg, #ff4d4d, #e60000);
+  color: #fff;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 77, 77, 0.5);
+  background: linear-gradient(145deg, #e60000, #ff4d4d);
+}

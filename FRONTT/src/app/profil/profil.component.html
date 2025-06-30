@@ -1,0 +1,32 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <!-- Veliki SVG avatar -->
+    <div class="avatar-wrapper">
+      <!-- Možeš zameniti path sa svojim SVG-om ili URL-om -->
+      <svg class="avatar-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <!-- <circle cx="32" cy="32" r="30" fill="#333" /> -->
+        <path d="M32 34c8 0 14-6 14-14s-6-14-14-14-14 6-14 14 6 14 14 14zm0 4c-9 0-26 4.5-26 13.5V60h52v-8.5C58 42.5 41 38 32 38z" fill="#00bfff" />
+      </svg>
+    </div>
+
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div *ngIf="korisnik; else loading" class="info">
+      <h2>Profil korisnika</h2>
+      <p><strong>Ime:</strong> {{ korisnik.ime }}</p>
+      <p><strong>Prezime:</strong> {{ korisnik.prezime }}</p>
+      <p><strong>Email:</strong> {{ korisnik.email }}</p>
+      <p><strong>Telefon:</strong> {{ korisnik.telefon }}</p>
+      <p><strong>Adresa:</strong> {{ korisnik.adresa }}</p>
+      <p><strong>Grad:</strong> {{ korisnik.grad }}</p>
+
+      <div class="buttons">
+        <button class="btn logout-btn" (click)="logout()">LOG OUT</button>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <p class="loading-text">Učitavanje podataka...</p>
+    </ng-template>
+  </div>
+</div>

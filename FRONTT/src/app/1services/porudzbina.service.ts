@@ -19,7 +19,8 @@ export class PorudzbinaService {
 
   osveziBrojArtikala() {
     let param = new HttpParams();
-    param = param.set('korisnik', 1);
+    const idKorisnik = Number(localStorage.getItem('id'));
+    param = param.set('korisnik', idKorisnik);
     this.http
       .get<number>(this.url + '/porudzbina/brojArtikala', {
         params: param,
@@ -29,7 +30,8 @@ export class PorudzbinaService {
       });
   }
 
-  dodajUKorpu(idArtikl: number, idKorisnik: number) {
+  dodajUKorpu(idArtikl: number) {
+    const idKorisnik = Number(localStorage.getItem('id'));
     const body = {
       idKorisnik: idKorisnik,
       idArtikl: idArtikl,
@@ -38,7 +40,8 @@ export class PorudzbinaService {
     return this.http.post<number>(this.url + '/porudzbina/dodaj', body);
   }
 
-  ukloniIzKorpe(idArtikl: number, idKorisnik: number) {
+  ukloniIzKorpe(idArtikl: number) {
+    const idKorisnik = Number(localStorage.getItem('id'));
     const body = {
       idKorisnik: idKorisnik,
       idArtikl: idArtikl,
@@ -47,7 +50,8 @@ export class PorudzbinaService {
     return this.http.post<number>(this.url + '/porudzbina/ukloni', body);
   }
 
-  izbaciJedan(idArtikl: number, idKorisnik: number) {
+  izbaciJedan(idArtikl: number) {
+    const idKorisnik = Number(localStorage.getItem('id'));
     const body = {
       idKorisnik: idKorisnik,
       idArtikl: idArtikl,
@@ -56,7 +60,8 @@ export class PorudzbinaService {
     return this.http.post<number>(this.url + '/porudzbina/izbaci', body);
   }
 
-  dohvatiSveIzKorpe(idKorisnik: number) {
+  dohvatiSveIzKorpe() {
+    const idKorisnik = Number(localStorage.getItem('id'));
     let param = new HttpParams();
     param = param.set('korisnik', idKorisnik);
     return this.http.get<Artikal[]>(this.url + '/porudzbina/korpa', {
@@ -64,7 +69,8 @@ export class PorudzbinaService {
     });
   }
 
-  naruci(idKorisnik: number) {
+  naruci() {
+    const idKorisnik = Number(localStorage.getItem('id'));
     const body = {
       idKorisnik: idKorisnik,
       idArtikl: 0,

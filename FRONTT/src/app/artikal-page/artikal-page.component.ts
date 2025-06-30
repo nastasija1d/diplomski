@@ -41,19 +41,26 @@ export class ArtikalPageComponent implements OnInit {
   }
 
   dodajUKorpu() {
-    if (this.artikal.kolicina == 0) {
+    const tip = Number(localStorage.getItem('tip'));
+    const idKorisnik = Number(localStorage.getItem('id'));
+
+    if (!idKorisnik || tip !== 1) {
+      this.message = 'Morate biti ulogovani';
+    } else if (this.artikal.kolicina == 0) {
       this.message = 'Nema na stanju';
     } else if (this.artikal.kolicina == this.dodato + this.artikal.korpa) {
-      this.message = 'Maksimalna kolicina dostignuta';
+      this.message = 'Maksimalna količina dostignuta';
     } else {
       this.dodato++;
       this.message = 'Artikal dodat u korpu';
-      this.porudzbinaService.dodajUKorpu(this.artikal.id, 1).subscribe();
+      this.porudzbinaService.dodajUKorpu(this.artikal.id).subscribe();
     }
+
     // Prikaži oblačić
     this.showToast = true;
     setTimeout(() => {
       this.showToast = false;
     }, 1000);
   }
+
 }

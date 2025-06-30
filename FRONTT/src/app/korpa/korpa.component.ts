@@ -29,7 +29,7 @@ export class KorpaComponent implements OnInit {
 
   refresh() {
     this.artikli;
-    this.servis.dohvatiSveIzKorpe(1).subscribe((data) => {
+    this.servis.dohvatiSveIzKorpe().subscribe((data) => {
       this.artikli = data;
       this.total = 0;
       for (let artikal of this.artikli) {
@@ -55,7 +55,7 @@ export class KorpaComponent implements OnInit {
   confirmRemoval() {
     if (this.artikalZaUklanjanje) {
       this.servis
-        .ukloniIzKorpe(this.artikalZaUklanjanje.id, 1)
+        .ukloniIzKorpe(this.artikalZaUklanjanje.id)
         .subscribe((data) => {
           if (data == 1) {
             this.refresh();

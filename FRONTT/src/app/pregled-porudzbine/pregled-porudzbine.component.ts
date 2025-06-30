@@ -19,7 +19,7 @@ export class PregledPorudzbineComponent implements OnInit {
   totaltotal: number;
 
   ngOnInit(): void {
-    this.servis.dohvatiSveIzKorpe(1).subscribe((data) => {
+    this.servis.dohvatiSveIzKorpe().subscribe((data) => {
       this.artikli = data;
       this.total = 0;
       for (let artikal of this.artikli) {
