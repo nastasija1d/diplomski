@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Korisnik } from '../1models/korisnik';
+import { Porudzbina } from '../1models/porudzbina';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServiceService {
@@ -39,6 +40,16 @@ export class AuthServiceService {
       : new HttpHeaders();
 
     return this.http.get<Korisnik>(`${this.apiUrl}/profil`, { headers });
+  }
+  
+  getArhiva(): Observable<Porudzbina[]> {
+    const token = this.getToken();
+
+    const headers = token
+      ? new HttpHeaders().set('Authorization', `Bearer ${token}`)
+      : new HttpHeaders();
+
+    return this.http.get<Porudzbina[]>(`${this.apiUrl}/arhiva`, { headers });
   }
 
   logout() {

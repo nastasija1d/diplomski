@@ -289,6 +289,47 @@ public class PorudzbinaRepo {
         }
     }
 
+
+    public List<PorudzbinaInfo> dohvatiSvePorudzbineZaKorisnika(String email) {
+        try (Connection con = DB.source().getConnection()) {
+            PreparedStatement ps = con
+                    .prepareStatement("SELECT p.idporudzbina, p.datum, p.iznos, p.idstatus,\n" + //
+                            "k.ime, k.prezime, k.email, k.lozinka, k.telefon, k.adresa,\n" + //
+                            "g.naziv, k.tip\n" + //
+                            "from porudzbina p inner join korisnik k\n" + //
+                            "on k.idKorisnik = p.idKorisnik\n" + //
+                            "inner join grad g\n" + //
+                            "on k.idGrad = g.idGrad" +
+                            " where (p.idstatus = 2 OR p.idstatus=3) and k.email=? " +
+                            "order by p.idporudzbina");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            List<PorudzbinaInfo> lista = new ArrayList<>();
+            while (rs.next()) {
+                Korisnik korisnik = new Korisnik(
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getInt(12));
+                PorudzbinaInfo porudzbina = new PorudzbinaInfo(
+                        rs.getInt(1),
+                        korisnik,
+                        rs.getDate(2),
+                        rs.getInt(3),
+                        rs.getInt(4));
+                porudzbina.setArtikli(dohvatiStavkeIzPorudzbine(rs.getInt(1)));
+                lista.add(porudzbina);
+            }
+            return lista;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     //////////////////// privatne metode///////////////////////////////
     ///
     private int getActiveOrderId(Connection con, int korisnikId) throws Exception {

@@ -44,7 +44,7 @@ export class PocetnaComponent implements OnInit, AfterViewInit {
     },
     {
       name: 'VOLKSWAGEN',
-      logo: 'http://localhost:8080/slika/marka/vw',
+      logo: 'http://localhost:8080/slika/marka/volkswagen',
       description: 'Volkswagen kombinuje nemačku preciznost sa praktičnim dizajnom.'
     },
     {

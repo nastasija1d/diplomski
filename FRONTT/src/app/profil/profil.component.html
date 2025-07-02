@@ -1,32 +1,86 @@
 <div class="profile-container">
-  <div class="profile-card">
-    <!-- Veliki SVG avatar -->
-    <div class="avatar-wrapper">
-      <!-- Možeš zameniti path sa svojim SVG-om ili URL-om -->
-      <svg class="avatar-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-        <!-- <circle cx="32" cy="32" r="30" fill="#333" /> -->
-        <path d="M32 34c8 0 14-6 14-14s-6-14-14-14-14 6-14 14 6 14 14 14zm0 4c-9 0-26 4.5-26 13.5V60h52v-8.5C58 42.5 41 38 32 38z" fill="#00bfff" />
-      </svg>
-    </div>
+  <!-- Leva kolona: profilna kartica -->
+  <div class="left-column">
+    <div class="profile-card">
+      <div class="avatar-wrapper">
+        <svg class="avatar-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 34c8 0 14-6 14-14s-6-14-14-14-14 6-14 14 6 14 14 14zm0 4c-9 0-26 4.5-26 13.5V60h52v-8.5C58 42.5 41 38 32 38z" fill="#00bfff" />
+        </svg>
+      </div>
 
-    <div *ngIf="error" class="error-message">{{ error }}</div>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
 
-    <div *ngIf="korisnik; else loading" class="info">
-      <h2>Profil korisnika</h2>
-      <p><strong>Ime:</strong> {{ korisnik.ime }}</p>
-      <p><strong>Prezime:</strong> {{ korisnik.prezime }}</p>
-      <p><strong>Email:</strong> {{ korisnik.email }}</p>
-      <p><strong>Telefon:</strong> {{ korisnik.telefon }}</p>
-      <p><strong>Adresa:</strong> {{ korisnik.adresa }}</p>
-      <p><strong>Grad:</strong> {{ korisnik.grad }}</p>
+      <div *ngIf="korisnik; else loading" class="info">
+        <h2>Profil korisnika</h2>
+        <p><strong>Ime:</strong> {{ korisnik.ime }}</p>
+        <p><strong>Prezime:</strong> {{ korisnik.prezime }}</p>
+        <p><strong>Email:</strong> {{ korisnik.email }}</p>
+        <p><strong>Telefon:</strong> {{ korisnik.telefon }}</p>
+        <p><strong>Adresa:</strong> {{ korisnik.adresa }}</p>
+        <p><strong>Grad:</strong> {{ korisnik.grad }}</p>
+      </div>
 
       <div class="buttons">
         <button class="btn logout-btn" (click)="logout()">LOG OUT</button>
       </div>
+
+      <ng-template #loading>
+        <p class="loading-text">Učitavanje podataka...</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Desna kolona: porudžbine -->
+  <div class="right-column">
+    <div *ngIf="porudzbine.length > 0; else nemaPorudzbina">
+      <h2 style="color: white; margin-bottom: 20px;">Sve porudzbine</h2>
+      <div *ngFor="let porudzbina of porudzbine" class="porudzbina-kartica">
+        <div class="osnovni-podaci" >
+          <p><strong>ID: </strong> {{ porudzbina.idPorudzbina }}</p>
+          <p><strong>Datum: </strong> {{ porudzbina.datum | date: 'dd.MM.yyyy' }}</p>
+          <p><strong>Iznos: </strong> {{ porudzbina.iznos }} RSD</p>
+          <p>
+            <strong>Status: </strong> 
+            {{ porudzbina.idStatus === 2 ? 'PRIMLJENO' : (porudzbina.idStatus === 3 ? 'ISPORUCENO' : porudzbina.idStatus) }}
+          </p>
+
+          <button (click)="toggleDetalje(porudzbina.idPorudzbina)">
+            {{ prikazatiDetalje(porudzbina.idPorudzbina) ? 'Sakrij detalje' : 'Detaljnije' }}
+          </button>
+        </div>
+
+        <div *ngIf="prikazatiDetalje(porudzbina.idPorudzbina)" class="artikli-tabela">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Naziv</th>
+                <th>Vrsta</th>
+                <th>Proizvođač</th>
+                <th>Količina</th>
+                <th>Cena</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let artikal of porudzbina.artikli">
+                <td>
+                  <img class="brand-logo" [src]="'http://localhost:8080/slika/marka/' + artikal.marka" alt="{{ artikal.marka }}"
+                  style="width: 35px; height:35px;">
+                </td>
+                <td>{{ artikal.naziv }}</td>
+                <td>{{ artikal.podVrsta }}</td>
+                <td>{{ artikal.proizvodjac }}</td>
+                <td>{{ artikal.korpa }}</td>
+                <td>{{ artikal.cena_prodajna }} RSD</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-    <ng-template #loading>
-      <p class="loading-text">Učitavanje podataka...</p>
+    <ng-template #nemaPorudzbina>
+      <p class="info">Nemate nijednu porudžbinu.</p>
     </ng-template>
   </div>
 </div>

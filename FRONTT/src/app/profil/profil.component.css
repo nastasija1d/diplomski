@@ -1,26 +1,53 @@
-/* Kontejner centriran na stranici */
+body {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Glavni raspored */
 .profile-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 40px;
   padding: 40px 20px;
 }
 
-/* Card sa glassmorphism efektom */
-.profile-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  padding: 30px;
+.left-column,
+.right-column {
   width: 100%;
-  max-width: 400px;
-  color: #f0f0f0;
-  text-align: center;
 }
 
-/* Avatar wrapper */
+@media screen and (min-width: 992px) {
+  .profile-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .left-column {
+    width: 33%;
+  }
+
+  .right-column {
+    width: 67%;
+  }
+}
+
+/* Profilna kartica */
+.profile-card {
+  text-align: center;
+  background: #ffffff10; /* providno belo siva podloga */
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+  color: white;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
 .avatar-wrapper {
   margin-bottom: 20px;
 }
@@ -30,32 +57,135 @@
   height: 150px;
   display: inline-block;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 191, 255, 0.1);
   padding: 10px;
   box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
 }
 
-/* Naslov */
 .profile-card h2 {
   font-size: 24px;
   margin-bottom: 20px;
   color: #00bfff;
-  letter-spacing: 0.5px;
 }
 
-/* Tekstovi */
 .profile-card p {
   margin: 8px 0;
   font-size: 16px;
   text-align: left;
 }
 
-/* Istaknuti labeli */
 .profile-card strong {
   color: #fff;
 }
 
-/* Error poruka */
+.buttons {
+  margin-top: 25px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(145deg, #00bfff, #009fcc);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 191, 255, 0.5);
+}
+
+/* Kartice porudžbina */
+.porudzbina-kartica {
+  background: #ffffff10; /* providno belo siva podloga */
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+  color: white;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+.porudzbina-kartica:hover {
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Osnovni podaci prikazani u jednom redu */
+.osnovni-podaci {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-between;
+  gap: 20px;
+  color: #fff;
+}
+
+.osnovni-podaci p {
+  margin: 4px 0;
+  font-size: 15px;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.osnovni-podaci button {
+  padding: 8px 16px;
+  width: 150px;
+  border: none;
+  background-color: #00bfffaf;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.osnovni-podaci button:hover {
+  background-color: #00a5d9;
+  transform: scale(1.05);
+}
+
+/* Tabela artikala */
+.artikli-tabela {
+  margin-top: 15px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.artikli-tabela table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.artikli-tabela th,
+.artikli-tabela td {
+  border: 1px solid #333;
+  padding: 10px;
+  text-align: left;
+  color: #fff;
+}
+
+.artikli-tabela th {
+  background-color: rgba(0, 191, 255, 0.1);
+  color: #00bfff;
+}
+
+.info {
+  text-align: center;
+  color: #ccc;
+  font-size: 18px;
+  margin-top: 40px;
+}
+
 .error-message {
   background: rgba(255, 0, 0, 0.1);
   color: #ff4d4d;
@@ -64,52 +194,18 @@
   margin-bottom: 16px;
 }
 
-/* Loading tekst */
 .loading-text {
   color: rgba(255, 255, 255, 0.7);
   font-style: italic;
 }
 
-/* Dugmad wrapper */
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 25px;
-}
-
-/* Osnovni stil dugmeta */
-.btn {
-  flex: 1;
-  padding: 10px 0;
-  border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
-
-/* Edit dugme */
-.edit-btn {
-  background: linear-gradient(145deg, #00bfff, #009acd);
-  color: #fff;
-}
-
-.edit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 191, 255, 0.5);
-  background: linear-gradient(145deg, #009acd, #00bfff);
-}
-
-/* Logout dugme */
-.logout-btn {
-  background: linear-gradient(145deg, #ff4d4d, #e60000);
-  color: #fff;
-}
-
-.logout-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(255, 77, 77, 0.5);
-  background: linear-gradient(145deg, #e60000, #ff4d4d);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scaleY(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }

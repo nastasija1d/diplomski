@@ -65,7 +65,7 @@ public class PorudzbinaController {
     @PostMapping("/naruci")
     public int poruci(@RequestBody Porudzbina porudzbina) {
         int idPorudzbina = new PorudzbinaRepo().poruci(porudzbina.getIdKorisnik());
-        if (idPorudzbina == 0)
+        if (idPorudzbina == 0) 
             return 0;
         this.emailService.sendConfirmOrderEmail(porudzbina.getIdKorisnik(), idPorudzbina);
         return idPorudzbina;

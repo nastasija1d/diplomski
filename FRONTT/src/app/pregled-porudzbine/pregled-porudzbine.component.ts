@@ -3,6 +3,8 @@ import { Artikal } from '../1models/artikal';
 import { PorudzbinaService } from '../1services/porudzbina.service';
 import { CommonModule } from '@angular/common';
 import { DugmePoruciComponent } from '../dugme-poruci/dugme-poruci.component';
+import { KorisnikService } from '../1services/korisnik.service';
+import { Korisnik } from '../1models/korisnik';
 
 @Component({
   selector: 'app-pregled-porudzbine',
@@ -14,7 +16,9 @@ import { DugmePoruciComponent } from '../dugme-poruci/dugme-poruci.component';
 export class PregledPorudzbineComponent implements OnInit {
   artikli: Artikal[];
   servis = inject(PorudzbinaService);
+  KorisnikService = inject(KorisnikService)
   total: number;
+  korisnik : Korisnik;
   dostava: number;
   totaltotal: number;
 
@@ -31,6 +35,10 @@ export class PregledPorudzbineComponent implements OnInit {
         this.dostava = 0;
       }
       this.totaltotal = this.total + this.dostava;
+      this.KorisnikService.dohvati().subscribe((data) => {
+        this.korisnik = data;
+        console.log(this.korisnik);
+      });
     });
   }
 }

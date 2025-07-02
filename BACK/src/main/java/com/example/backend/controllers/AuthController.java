@@ -1,6 +1,7 @@
 package com.example.backend.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.config.JwtUtil;
 import com.example.backend.db.dao.KorisnikRepo;
+import com.example.backend.db.dao.PorudzbinaRepo;
 import com.example.backend.models.Korisnik;
+import com.example.backend.models.PorudzbinaInfo;
 
 @RestController
 @RequestMapping("/auth")
@@ -49,7 +52,7 @@ public class AuthController {
         return response;
     }
 
-     @GetMapping("/profil")
+    @GetMapping("/profil")
     public ResponseEntity<Korisnik> dohvatiProfil(@RequestHeader("Authorization") String authHeader) {
         try {
             // Izvlačenje tokena iz Authorization zaglavlja: "Bearer token"
@@ -67,6 +70,23 @@ public class AuthController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @GetMapping("/arhiva")
+    public List<PorudzbinaInfo> dohvatiArhivu(@RequestHeader("Authorization") String authHeader) {
+        System.out.println("Fetching archive for user...");
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            String email = jwtUtil.extractClaims(token).getSubject();
+            Korisnik korisnik = korisnikRepo.nadjiPoEmailu(email);
+            if (korisnik == null) {return null;}
+            System.out.println("User found: " + korisnik.getEmail() );
+            return new PorudzbinaRepo().dohvatiSvePorudzbineZaKorisnika(email);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

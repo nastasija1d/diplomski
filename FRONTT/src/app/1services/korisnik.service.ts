@@ -13,5 +13,10 @@ export class KorisnikService {
     return this.http.post<number>(this.url + '/korisnik/registracija', k);
   }
 
+  dohvati(){
+    const id = localStorage.getItem('id');
+    return this.http.get<Korisnik>(this.url + '/korisnik/' + id);
+  }
+
   constructor() {}
 }

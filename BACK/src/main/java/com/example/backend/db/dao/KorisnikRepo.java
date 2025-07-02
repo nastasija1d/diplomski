@@ -98,4 +98,29 @@ public class KorisnikRepo {
     return -1;
 }
 
+
+    public Korisnik getKorisnik(String id) {
+        try (Connection conn = DB.source().getConnection();
+            PreparedStatement ps = conn.prepareStatement(
+                "SELECT ime, prezime, email, telefon, adresa, g.naziv AS grad " +
+                "FROM korisnik k JOIN grad g ON k.idGrad = g.idGrad WHERE k.idkorisnik = ?")) {
+
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Korisnik k = new Korisnik();
+                k.setIme(rs.getString("ime"));
+                k.setPrezime(rs.getString("prezime"));
+                k.setEmail(rs.getString("email"));
+                k.setTelefon(rs.getString("telefon"));
+                k.setAdresa(rs.getString("adresa"));
+                k.setGrad(rs.getString("grad"));
+                return k;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

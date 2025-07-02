@@ -14,7 +14,6 @@
 h1 {
   font-size: 2.5rem;
   color: #00bfff;
-  text-shadow: 0 0 10px #00bfff;
   margin-bottom: 10px;
 }
 
@@ -70,7 +69,6 @@ h1 {
 .summary-section h2 {
   font-size: 1.4rem;
   color: white;
-  text-shadow: 0 0 5px #00bfff;
   margin-bottom: 1.5rem;
   text-align: center;
 }

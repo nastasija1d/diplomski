@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Korisnik } from '../1models/korisnik';
 import { AuthServiceService } from '../1services/auth-service.service';
 import { CommonModule } from '@angular/common';
+import { PorudzbinaService } from '../1services/porudzbina.service';
+import { Porudzbina } from '../1models/porudzbina';
 
 @Component({
   selector: 'app-profil',
@@ -13,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class ProfilComponent implements OnInit {
   korisnik: Korisnik | null = null;
   error: string | null = null;
+  porudzbine: Porudzbina[] = []; // Lista porudžbina
 
   constructor(private authService: AuthServiceService) {}
 
@@ -20,6 +23,16 @@ export class ProfilComponent implements OnInit {
     this.authService.getProfil().subscribe({
       next: (data) => {
         this.korisnik = data;
+        this.authService.getArhiva().subscribe({
+          next: (porudzbineData) => {
+            this.porudzbine = porudzbineData; 
+
+          },
+          error: (err) => {
+            this.error = 'Greška pri dohvatanju arhive porudžbina.';
+            console.error(err);
+          }
+        });
       },
       error: (err) => {
         this.error = 'Greška pri dohvatanju profila. Molimo ulogujte se ponovo.';
@@ -32,4 +45,20 @@ export class ProfilComponent implements OnInit {
     this.authService.logout();
     window.location.reload(); // Osvježavanje stranice nakon odjave
   }
+
+  otvorenePorudzbine: number[] = [];
+
+toggleDetalje(id: number) {
+  const index = this.otvorenePorudzbine.indexOf(id);
+  if (index > -1) {
+    this.otvorenePorudzbine.splice(index, 1); // Sakrij
+  } else {
+    this.otvorenePorudzbine.push(id); // Prikaži
+  }
+}
+
+prikazatiDetalje(id: number): boolean {
+  return this.otvorenePorudzbine.includes(id);
+}
+
 }

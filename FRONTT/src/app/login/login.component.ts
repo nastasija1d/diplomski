@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from '../1services/auth-service.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PorudzbinaService } from '../1services/porudzbina.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthServiceService,
+    private porudzbina: PorudzbinaService,
     private router: Router
   ) {}
 
@@ -30,6 +32,7 @@ export class LoginComponent {
 
       if (tip === '1') {
         // KUPAC
+        this.porudzbina.osveziBrojArtikala();
         this.router.navigate(['/']);
       } else if (tip === '2') {
         // ADMIN

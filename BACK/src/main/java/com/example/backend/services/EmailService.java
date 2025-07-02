@@ -4,8 +4,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.example.backend.db.dao.KorisnikRepo;
 import com.example.backend.db.dao.PorudzbinaRepo;
 import com.example.backend.models.Artikal;
+import com.example.backend.models.Korisnik;
 import com.example.backend.models.PorudzbinaInfo;
 
 import jakarta.mail.MessagingException;
@@ -24,8 +26,9 @@ public class EmailService {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+            Korisnik k = new KorisnikRepo().getKorisnik(idKorisnik+"");
             helper.setFrom("nastasija1d@gmail.com");
-            helper.setTo("nastasija1d@gmail.com");
+            helper.setTo(k.getEmail());
             helper.setSubject("Potvrda porudzbine");
 
             PorudzbinaInfo por = new PorudzbinaRepo().dohvatiDetaljePorudzbina(idPorudzbina);
