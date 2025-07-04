@@ -1,4 +1,4 @@
-<div class="profile-container">
+<div class="profile-container" >
   <!-- Leva kolona: profilna kartica -->
   <div class="left-column">
     <div class="profile-card">
@@ -32,7 +32,7 @@
 
   <!-- Desna kolona: porudžbine -->
   <div class="right-column">
-    <div *ngIf="porudzbine.length > 0; else nemaPorudzbina">
+    <div *ngIf="porudzbine.length > 0;">
       <h2 style="color: white; margin-bottom: 20px;">Sve porudzbine</h2>
       <div *ngFor="let porudzbina of porudzbine" class="porudzbina-kartica">
         <div class="osnovni-podaci" >
@@ -63,11 +63,11 @@
             </thead>
             <tbody>
               <tr *ngFor="let artikal of porudzbina.artikli">
-                <td>
+                <td style="text-align: center;">
                   <img class="brand-logo" [src]="'http://localhost:8080/slika/marka/' + artikal.marka" alt="{{ artikal.marka }}"
                   style="width: 35px; height:35px;">
                 </td>
-                <td>{{ artikal.naziv }}</td>
+                <td><a [routerLink]="['/artikal', artikal.id]" class="text-title">{{artikal.naziv}}</a></td>
                 <td>{{ artikal.podVrsta }}</td>
                 <td>{{ artikal.proizvodjac }}</td>
                 <td>{{ artikal.korpa }}</td>
@@ -79,8 +79,6 @@
       </div>
     </div>
 
-    <ng-template #nemaPorudzbina>
-      <p class="info">Nemate nijednu porudžbinu.</p>
-    </ng-template>
+   
   </div>
 </div>

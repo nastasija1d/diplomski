@@ -27,7 +27,7 @@
     <!-- KORPA (samo za kupca) -->
     <a *ngIf="userRole !== 'ADMIN'" routerLink="korpa" class="tooltip-container">
       <app-korpa-ikona></app-korpa-ikona>
-      <span class="tooltip-text">Korpa</span>
+      <span style="bottom: -40%;" class="tooltip-text">Korpa</span>
     </a>
 
     <!-- LINK KA PROFILU (različit za kupca i neulogovanog) -->
@@ -52,7 +52,7 @@
           <path d="M4 12L12 4l8 8" />
           <path d="M4 12v8a2 2 0 0 0 2 2h3v-6h6v6h3a2 2 0 0 0 2-2v-8" />
         </svg>
-        <span class="tooltip-text">Pocetna</span>
+        <span style="bottom: -52%;"class="tooltip-text">Pocetna</span>
       </a>
       <a [routerLink]="'/vlasnik/aktivne-porudzbine'" class="admin-icon tooltip-container">
         <img src="vlasnik/package.png" alt="Aktivne">

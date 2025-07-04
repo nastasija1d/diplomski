@@ -79,6 +79,6 @@
   <div class="pagination">
     <button (click)="prevPage()" [disabled]="currentPage === 0" class="nav-button">← Prev</button>
     <span class="page-number">Page {{ currentPage + 1 }}</span>
-    <button (click)="nextPage()"  class="nav-button">Next →</button>
+    <button (click)="nextPage()" [disabled]="!artikli || artikli.length < pageSize" class="nav-button">Next →</button>
   </div>
 </div>

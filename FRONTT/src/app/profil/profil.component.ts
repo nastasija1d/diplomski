@@ -4,11 +4,12 @@ import { AuthServiceService } from '../1services/auth-service.service';
 import { CommonModule } from '@angular/common';
 import { PorudzbinaService } from '../1services/porudzbina.service';
 import { Porudzbina } from '../1models/porudzbina';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profil',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './profil.component.html',
   styleUrl: './profil.component.css'
 })

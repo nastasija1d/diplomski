@@ -14,17 +14,20 @@ export class SavetiComponent {
     {
       ikona: '🛢️',
       naslov: 'Kada zameniti ulje i filtere?',
-      opis: 'Redovna zamena ulja štiti motor i produžava mu vek trajanja. Saznaj koji su intervali idealni.'
+      opis: 'Redovna zamena ulja štiti motor i produžava mu vek trajanja. Saznaj koji su intervali idealni.',
+      link: 'https://www.prodajadelova.rs/zasto-treba-menjati-ulje-u-motoru'
     },
     {
       ikona: '🔋',
       naslov: 'Kako znati da je akumulator pri kraju?',
-      opis: 'Sporo paljenje, slaba svetla i problemi pri startovanju ukazuju na slab akumulator.'
+      opis: 'Sporo paljenje, slaba svetla i problemi pri startovanju ukazuju na slab akumulator.',
+      link: 'https://www.polovniautomobili.com/auto-vesti/saveti/7194/kad-je-vreme-za-novi-akumulator'
     },
     {
       ikona: '🚘',
       naslov: 'Kako prepoznati istrošene kočione pločice?',
-      opis: 'Cviljenje, slabije kočenje i duži put zaustavljanja znak su da je vreme za zamenu.'
+      opis: 'Cviljenje, slabije kočenje i duži put zaustavljanja znak su da je vreme za zamenu.',
+      link: 'https://www.polovniautomobili.com/auto-vesti/saveti/7272/na-koliko-se-menjaju-kocioni-diskovi-i-plocice'
     }
   ];
 

@@ -209,3 +209,12 @@ body {
     transform: scaleY(1);
   }
 }
+
+a{
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #00bfff;
+}

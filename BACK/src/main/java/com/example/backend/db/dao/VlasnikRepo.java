@@ -25,7 +25,7 @@ public class VlasnikRepo {
                                 "inner join marka on\n" + //
                                 "marka.idMarka = artikl.idMarka\n" + //
                                 "where porudzbina.datum>=?\n" + //
-                                "and porudzbina.datum<=?\n" + //
+                                "and porudzbina.datum<=? and porudzbina.idstatus=3\n" + //
                                 "group by artikl.idmarka\n" + //
                                 "order by sum(stavka.kolicina) desc");
             ps.setString(1, datumOD);
@@ -51,7 +51,7 @@ public class VlasnikRepo {
                                 "inner join proizvodjac on\n" + //
                                 "proizvodjac.idproizvodjac = artikl.idproizvodjac\n" + //
                                 "where porudzbina.datum>=?\n" + //
-                                "and porudzbina.datum<=?\n" + //
+                                "and porudzbina.datum<=? and porudzbina.idstatus=3\n" + //
                                 "group by artikl.idproizvodjac\n" + //
                                 "order by sum(stavka.kolicina) desc");
             ps.setString(1, datumOD);
@@ -79,7 +79,7 @@ public class VlasnikRepo {
                                 "inner join vrsta on\n" + //
                                 "vrsta.idVrsta = podvrsta.idVrsta\n" + //
                                 "where porudzbina.datum>=?\n" + //
-                                "and porudzbina.datum<=?\n" + //
+                                "and porudzbina.datum<=? and porudzbina.idstatus=3\n" + //
                                 "group by podvrsta.idVrsta\n" + //
                                 "order by sum(stavka.kolicina) desc");
             ps.setString(1, datumOD);
@@ -107,7 +107,7 @@ public class VlasnikRepo {
                                     "k.idkorisnik = porudzbina.idkorisnik \n" + //
                                     "inner join grad g on g.idgrad = k.idgrad \n" + //
                                     "where porudzbina.datum>= ?\n" + //
-                                    "and porudzbina.datum<= ?\n" + //
+                                    "and porudzbina.datum<= ? and porudzbina.idstatus=3\n" + //
                                     "group by porudzbina.idporudzbina\n" + //
                                     "order by porudzbina.datum");
             ps.setString(1, datumOD);
@@ -150,7 +150,7 @@ public class VlasnikRepo {
                         "inner join proizvodjac on proizvodjac.idproizvodjac = artikl.idproizvodjac\n" + //
                         "inner join stavka on stavka.idArtikl = artikl.idArtikl\n" + //
                         "inner join porudzbina on porudzbina.idporudzbina = stavka.idporudzbina\n" + //
-                        "where porudzbina.datum>=? and porudzbina.datum<=?\n" + //
+                        "where porudzbina.datum>=? and porudzbina.datum<=? and porudzbina.idstatus=3\n" + //
                         "group by artikl.idArtikl\n" + //
                         "order by sum(stavka.kolicina) desc, artikl.idArtikl\n" + //
                         "")) {
